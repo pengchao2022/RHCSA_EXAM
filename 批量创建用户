@@ -1,1 +1,21 @@
+#!/bin/bash
 
+useradd luban
+
+useradd xiangyu
+
+useradd songjiang
+
+useradd yase
+
+echo "redhat" | passwd --stdin luban
+
+echo "redhat" | passwd --stdin xiangyu
+
+echo "redhat" | passwd --stdin songjiang
+
+echo "redhat" | passwd --stdin yase
+
+创建一个不能登录 shell 的用户 
+
+useradd -s /sbin/nologin sarash
