@@ -1,0 +1,39 @@
+Install chrony
+
+yum -y install chrony
+
+systemctl	enable chronyd.service
+
+netstat -antup | grep :123
+
+firewall-cmd --add-service=chrony --permanent
+
+firewall-cmd --reload
+
+vim /etc/chrony.conf
+
+server   classroom.example.com （配置文件内容）
+
+systemctl restart chronyd.service
+
+timedatectl set-ntp true
+
+timedatectl status
+
+chronyc sources
+
+查看当前的时区：
+
+timedatectl
+
+列出所有时区：
+
+timedatectl list-timezones
+
+设置自己的时区为Asia/Shanghai
+
+timedatectl set-timezone Asia/Shanghai
+
+
+
+
