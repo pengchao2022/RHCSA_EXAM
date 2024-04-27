@@ -1,0 +1,10 @@
+ssh-keygen
+enter
+enter
+
+
+ssh-copy-id 192.168.19.160
+
+
+基于key 验证的免密登录 
+
