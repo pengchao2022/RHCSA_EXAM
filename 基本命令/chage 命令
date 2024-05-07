@@ -1,0 +1,57 @@
+查看用户账号密码的详情：
+[root@centosx ~]# chage -l phobe
+Last password change					: May 07, 2024
+Password expires					: never
+Password inactive					: never
+Account expires						: never
+Minimum number of days between password change		: 0
+Maximum number of days between password change		: 99999
+Number of days of warning before password expires	: 7
+
+设置两次更改密码之间最大天数为180 天
+root@centosx ~]# chage -M 180 phobe
+[root@centosx ~]# chage -l phobe
+Last password change					: May 07, 2024
+Password expires					: Nov 03, 2024
+Password inactive					: never
+Account expires						: never
+Minimum number of days between password change		: 0
+Maximum number of days between password change		: 180
+Number of days of warning before password expires	: 7
+[root@centosx ~]# 
+
+设置两次更改密码之间的最小天数为30 天
+[root@centosx ~]# chage -m 30 phobe
+[root@centosx ~]# chage -l phobe
+Last password change					: May 07, 2024
+Password expires					: Nov 03, 2024
+Password inactive					: never
+Account expires						: never
+Minimum number of days between password change		: 30
+Maximum number of days between password change		: 180
+Number of days of warning before password expires	: 7
+
+强制用户在下次登录时修改密码：
+root@centosx ~]# chage -d 0 phobe
+[root@centosx ~]# 
+
+设置账户的过期时间：
+[root@centosx ~]# chage -E '2025-01-01' phobe   ----- 账户于2025年1月1日到期
+[root@centosx ~]# 
+
+设置账户永久有效：
+[root@centosx ~]# chage -E -1 phobe
+[root@centosx ~]# 
+
+设置密码过期前5天开始提醒：
+[root@centosx ~]# chage -W 5 phobe
+[root@centosx ~]# 
+
+--------------------------------------
+设置用户phobe 的密码 可以随时修改密码，并且密码最高有效期为90 天，然后再密码过期前15 天发出警告提示：
+[root@centosx ~]# chage -m 0 -M 90 -W 15 phobe
+[root@centosx ~]# 
+
+
+  
+
