@@ -39,5 +39,13 @@ root@centosm ~]# source /etc/profile
 
 可以看到已经修改为默认保存3000 条
 
+-------------------------------------------
+history 命令也可以在终端进行搜索：
+
+contrl +R 可进入命令搜索模式：
+
+(reverse-i-search)`': 
+
+
   
 
