@@ -1,0 +1,6 @@
+查看一个文件的前三行
+
+root@centosm ~]# head lisi.txt -n 3
+helloworld
+
+this is just a test 
