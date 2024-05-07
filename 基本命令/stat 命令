@@ -1,0 +1,11 @@
+
+[root@centosx phobe]# stat /etc/sudoers
+  File: ‘/etc/sudoers’
+  Size: 4383      	Blocks: 16         IO Block: 4096   regular file
+Device: 803h/2051d	Inode: 17993270    Links: 1
+Access: (0440/-r--r-----)  Uid: (    0/    root)   Gid: (    0/    root)
+Context: unconfined_u:object_r:etc_t:s0
+Access: 2024-05-07 16:44:16.250168921 +0800
+Modify: 2024-05-07 16:43:50.806111683 +0800
+Change: 2024-05-07 16:43:50.810116527 +0800
+ Birth: -
