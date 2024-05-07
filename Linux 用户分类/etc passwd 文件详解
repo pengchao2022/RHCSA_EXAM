@@ -1,0 +1,30 @@
+关于/etc/passwd 文件的解释：
+
+[root@centosx ~]# cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+
+
+root:x:0:0:root:/root:/bin/bash   做一下说明
+
+root --- 为用户名
+x   -----为用户的密码 以加密格式存在这儿  ---现在已经转移至/etc/shadow 文件里
+0   -----为用户的uid
+0   -----为用户所在组的Gid
+root ----为用户的真实姓名
+/root ---为用户的家目录
+/bin/bash -----为用户所使用的shell 类型
+
+winslate:x:1001:1001::/home/winslate:/bin/bash 普通用户做一下说明
+
+winslate ----为用户名
+x       -----为用户的密码，以加密格式存在这儿  ---现在已经转移至 /etc/shadow 文件里
+1001    -----为用户的uid
+1001    -----为用户所在组的 gid 
+:       -----用户的真实姓名没有指定
+/home   -----为用户的家目录
+/bin/bash ---为用户所使用的shell 类型
+
+
+
