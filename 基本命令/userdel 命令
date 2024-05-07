@@ -1,0 +1,6 @@
+userdel 命令
+
+当要求删除用户的同时一并删除用户的家目录 那需要用 userdel -r 命令
+
+[root@centosx ~]# userdel -r winslate
+[root@centosx ~]# 
