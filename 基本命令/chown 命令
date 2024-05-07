@@ -1,0 +1,15 @@
+chown 命令用于修改文件或目录的所有者或所属组
+如： 将文件lisi.txt 所有者从 root 修改为 pengchao
+
+[root@centosx phobe]# ll lisi.txt 
+-rw-r--rw-. 1 root root 5 May  7 17:19 lisi.txt
+[root@centosx phobe]# chown pengchao lisi.txt 
+[root@centosx phobe]# ll lisi.txt 
+-rw-r--rw-. 1 pengchao root 5 May  7 17:19 lisi.txt
+
+还可以将 list 的所属组 root 修改为 bmw 组：
+
+[root@centosx phobe]# chown :bmw lisi.txt 
+[root@centosx phobe]# ll lisi.txt 
+-rw-r--rw-. 1 pengchao bmw 5 May  7 17:19 lisi.txt
+[root@centosx phobe]# 
