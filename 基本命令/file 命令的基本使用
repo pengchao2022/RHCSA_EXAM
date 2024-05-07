@@ -1,0 +1,10 @@
+file 命令可以显示文件的类型：
+
+root@centosm ~]# file /etc/passwd
+/etc/passwd: ASCII text      -----------------------表示是一个 text 文件
+
+[root@centosm ~]# file /bin/passwd 
+/bin/passwd: setuid ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.32, BuildID[sha1]=dee1b9ab6618c6bfb84a14f85ba258c742cf4aec, stripped
+
+[root@centosm ~]# file /home
+/home: directory               ---------------------表示是一个目录文件
