@@ -1,0 +1,4 @@
+pwd 命令 显示当前路径的绝对路径
+
+[root@centosm Downloads]# pwd
+/home/pengchao/Downloads
