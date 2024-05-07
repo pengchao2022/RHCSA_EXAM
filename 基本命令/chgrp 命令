@@ -1,0 +1,24 @@
+chgrp 命令用于修改 文件或文件夹所属的组，
+如 将 myengine.sh 文件所属的组 从 root 改为bmw :
+
+[root@centosx phobe]# ll
+total 8
+-rw-r--rw-. 1 pengchao bmw   5 May  7 17:19 lisi.txt
+-rw-r--r--. 1 root     root 10 May  7 17:46 myengine.sh
+[root@centosx phobe]# chgrp bmw myengine.sh 
+[root@centosx phobe]# ll
+total 8
+-rw-r--rw-. 1 pengchao bmw  5 May  7 17:19 lisi.txt
+-rw-r--r--. 1 root     bmw 10 May  7 17:46 myengine.sh
+[root@centosx phobe]# 
+
+chgrp -R 命令 可以递归将下层文件及文件夹所属组改变过来：
+
+[root@centosx phobe]# ll /root/think/2023/2024/us.sh 
+-rw-r--r--. 1 root root 0 May  7 17:50 /root/think/2023/2024/us.sh
+[root@centosx phobe]# chgrp -R bmw /root/think/
+[root@centosx phobe]# 
+[root@centosx phobe]# ll /root/think/2023/2024/
+total 0
+-rw-r--r--. 1 root bmw 0 May  7 17:50 us.sh
+[root@centosx phobe]# 
