@@ -22,3 +22,14 @@ Tue May  7 08:05:47 CST 2024
 显示星期
 [root@centosm ~]# date +%A
 Tuesday
+
+---------------------------------
+想看看100 天后的今天是几月几号：
+
+[root@centosx ~]# date -d "+100 days" -u
+Thu Aug 15 08:28:36 UTC 2024
+
+
+
+
+
