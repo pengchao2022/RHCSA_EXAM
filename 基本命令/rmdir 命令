@@ -1,0 +1,8 @@
+rmdir 命令用于删除空文件夹：
+
+[root@centosm linuxshell]# rmdir /root/ubuntu/
+[root@centosm linuxshell]# ls /root/
+anaconda-ks.cfg  app  hello  hello.txt  lisi.txt  original-ks.cfg  xcode2024  zabbix-release-6.0-4.el7.noarch.rpm
+
+可以看到空的ubuntu 文件夹已经不存在了
+
