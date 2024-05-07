@@ -10,6 +10,11 @@ kill -1 ---------- 重新加载配置文件，但是不会终止服务
 [root@centosx phobe]# kill -1 `(pidof vsftpd)`
 [root@centosx phobe]# 
 
+kill -18 --------- 继续加载命令
+kill -19 --------- 停止加载命令 相当于 control z
+
+
+
 
 
 
