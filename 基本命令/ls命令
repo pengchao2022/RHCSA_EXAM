@@ -1,0 +1,6 @@
+ls 命令的基本用法
+
+精确查看某一文件或文件夹的属性
+
+[root@centosm var]# ls -dl yp
+drwxr-xr-x. 2 root root 6 Apr 11  2018 yp
