@@ -21,3 +21,7 @@ systemd-network:x:192:192:systemd Network Management:/:/sbin/nologin
 dbus:x:81:81:System message bus:/:/sbin/nologin
 polkitd:x:999:998:User for polkitd:/:/sbin/nologin
 libstoragemgmt:x:998:995:daemon account for libstoragemgmt:/var/run/lsm:/sbin/nologin
+
+tee -a mypasswd 可以用于追加，比如把 /etc/group 的内容追加到 mypasswd 里
+
+root@centosm ~]# cat /etc/group | tee -a mypasswd 
