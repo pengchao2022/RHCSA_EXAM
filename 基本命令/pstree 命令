@@ -1,0 +1,36 @@
+pstree 命令可以打印进程树
+
+[root@centosx phobe]# pstree
+systemd─┬─ModemManager───2*[{ModemManager}]
+        ├─NetworkManager───2*[{NetworkManager}]
+        ├─VGAuthService
+        ├─2*[abrt-watch-log]
+        ├─abrtd
+        ├─accounts-daemon───2*[{accounts-daemon}]
+        ├─alsactl
+        ├─anacron
+        ├─at-spi-bus-laun─┬─dbus-daemon───{dbus-daemon}
+        │                 └─3*[{at-spi-bus-laun}]
+        ├─at-spi2-registr───2*[{at-spi2-registr}]
+        ├─atd
+        ├─auditd─┬─audispd─┬─sedispatch
+        │        │         └─{audispd}
+        │        └─{auditd}
+        ├─avahi-daemon───avahi-daemon
+        ├─bluetoothd
+        ├─boltd───2*[{boltd}]
+        ├─chronyd
+        ├─colord───2*[{colord}]
+        ├─crond
+        ├─cupsd
+        ├─2*[dbus-daemon───{dbus-daemon}]
+        ├─dbus-launch
+        ├─dconf-service───2*[{dconf-service}]
+        ├─dnsmasq───dnsmasq
+        ├─evolution-addre─┬─evolution-addre───5*[{evolution-addre}]
+        │                 └─4*[{evolution-addre}]
+        ├─evolution-calen─┬─evolution-calen───8*[{evolution-calen}]
+        │                 └─4*[{evolution-calen}]
+        ├─evolution-sourc───3*[{evolution-sourc}]
+        ├─fwupd───4*[{fwupd}]
+        ├─gdm─┬─X───{X}
