@@ -1,0 +1,13 @@
+linux 下建立一个空文件
+
+[root@centosm kate]# touch test.txt
+[root@centosm kate]# ls
+shell01.sh  test.txt
+
+touch 命令可以修改文件的时间
+
+root@centosm kate]# touch -t 202404121230 test.txt 
+[root@centosm kate]# ls -l
+total 8
+-rwxr-xr-x. 1 root root 34 May  7 10:48 shell01.sh
+-rw-r--r--. 1 root root 30 Apr 12 12:30 test.txt
