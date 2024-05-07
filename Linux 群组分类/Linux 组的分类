@@ -1,0 +1,17 @@
+Linux 中 组分为 主要组 和 附加组
+
+主要组（私有组）
+
+
+附加组
+
+linux 中的组保存在 /etc/group 文件中
+可以用 cat /etc/group 来查看里面的组
+
+[root@centosx ~]# cat /etc/group | grep root
+root:x:0:
+
+root 为组名
+x ---为组的密码
+0 ---为组id 即 gid
+
