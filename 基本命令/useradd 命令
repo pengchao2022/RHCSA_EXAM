@@ -1,0 +1,19 @@
+linux 中创建一个用户 这个用户不能登录，也不能创建家目录
+
+useradd -s /bin/false -M nginxtest
+
+也可以使用这样的方式：
+
+useradd -M nginxtest1 -s /sbin/nologin
+[root@centosx ~]# su nginxtest1
+This account is currently not available.
+
+linux 中创建新用户并指定家目录：
+
+useradd -d /home/zhangsan -m zhangsan -s /bin/bash
+
+linux 中创建新用户并指定 uid:
+[root@centosx ~]# useradd -u 1080 lisi
+[root@centosx ~]# id lisi
+uid=1080(lisi) gid=1080(lisi) groups=1080(lisi)
+
