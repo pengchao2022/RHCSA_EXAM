@@ -1,0 +1,16 @@
+复制一个文件到另一个文件夹：
+
+[root@centosm linuxshell]# cp install.sh.bak /root/app
+[root@centosm linuxshell]# 
+[root@centosm linuxshell]# ll /root/app
+total 0
+-rw-r--r--. 1 root root 0 May  7 11:17 install.sh.bak
+
+复制一个文件到另一个文件夹并改名：
+
+[root@centosm linuxshell]# cp install.sh.bak /root/xcode2024/install.sh
+[root@centosm linuxshell]# ll /root/xcode2024/
+total 0
+-rw-r--r--. 1 root root 0 May  7 11:19 install.sh
+
+
