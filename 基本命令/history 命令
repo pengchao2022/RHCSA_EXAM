@@ -1,0 +1,43 @@
+清空历史记录的命令
+[root@centosm ~]# history -c
+[root@centosm ~]# 
+
+电脑关机再开机，历史记录还在
+
+history 文件的位置可以用 ls -a 显示：
+[root@centosm ~]# ls -a
+.   .bash_history  .bash_profile  .cache   .cshrc  .tcshrc   anaconda-ks.cfg  hello.txt  original-ks.cfg
+..  .bash_logout   .bashrc        .config  .pki    .viminfo  hello            lisi.txt   zabbix-release-6.0-4.el7.noarch.rpm
+[root@centosm ~]# cat .bash_history ------------------------ 记录历史记录的文件
+timedatectl set-timezone Asia/Shanghai
+hostnamectl set-hostname centosm
+clear
+ip a
+vim /etc/sysconfig/network-scripts/ifcfg-ens33 
+yum update -y
+kill -9 55617
+yum update -y
+reboot
+
+----------------------------------
+显示history 命令默认保存的条数：
+[root@centosm ~]# echo $HISTSIZE
+1000          
+
+修改history 命令默认保存条数为 3000 条
+  
+[root@centosm ~]# vim /etc/profile
+HOSTNAME=`/usr/bin/hostname 2>/dev/null`
+HISTSIZE=3000
+  
+修改后立即生效要执行 source 命令
+root@centosm ~]# source /etc/profile
+
+现在检查history默认保存的条数
+[root@centosm ~]# echo $HISTSIZE
+3000
+
+可以看到已经修改为默认保存3000 条
+
+  
+
