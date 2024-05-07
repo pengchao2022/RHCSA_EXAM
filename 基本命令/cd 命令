@@ -11,3 +11,7 @@ cd -
 [root@centosm ~]# cd ~kate
 [root@centosm kate]# pwd
 /home/kate
+
+cd .  进入当前目录
+cd .. 返回到上一级目录
+
