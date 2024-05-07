@@ -2,6 +2,14 @@ kill 命令的用法
 
 kill -1 ---------- 重新加载配置文件，但是不会终止服务
 
-kill -1 pid 
+给ftp server 传递参数1 让服务器在不终止的情况下 重新加载配置文件
+
+[root@centosx phobe]# kill -1 $(pidof vsftpd)
+[root@centosx phobe]# 
+
+[root@centosx phobe]# kill -1 `(pidof vsftpd)`
+[root@centosx phobe]# 
+
+
 
 
