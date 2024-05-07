@@ -1,0 +1,13 @@
+mv 命令用于移动一个文件到另一个文件夹
+
+[root@centosm myfiles]# mv /home/pengchao/install.sh /home/pengchao/linuxshell/
+[root@centosm myfiles]# ll /home/pengchao/linuxshell/
+total 0
+-rw-r--r--. 1 root root 0 May  7 11:13 install.sh
+
+mv 命令用于修改 rename 重命名一个文件
+
+[root@centosm linuxshell]# mv install.sh install.sh.bak
+[root@centosm linuxshell]# ls
+install.sh.bak
+
