@@ -1,0 +1,13 @@
+回到家目录
+cd ~
+
+回到上次目录
+cd -
+
+在任何位置敲 cd  enter 都可以回到家目录
+
+~ 代表/home/
+进入普通用户kate 的家目录：
+[root@centosm ~]# cd ~kate
+[root@centosm kate]# pwd
+/home/kate
