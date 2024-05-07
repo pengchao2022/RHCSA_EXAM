@@ -5,4 +5,19 @@ Linux 常见用户分类：
 3，普通用户
 
 linux 通过uid 来判断用户级别的 ， root 用户的 uid=0
+[root@centosx ~]# id root
+uid=0(root) gid=0(root) groups=0(root)
+
+系统用户的uid  uid 1-999
+
+[root@centosx ~]# id mysql
+uid=27(mysql) gid=27(mysql) groups=27(mysql)
+
+普通用户的uid uid 1000以上
+
+[root@centosx ~]# id pengchao
+uid=1000(pengchao) gid=1000(pengchao) groups=1000(pengchao)
+
+
+
 
