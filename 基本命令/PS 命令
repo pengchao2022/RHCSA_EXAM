@@ -1,0 +1,18 @@
+ps 命令用于显示进程
+
+直接打ps 可以看到
+[root@centosx phobe]# ps        ----- 直接输入 ps 只能显示 终端 和终端 有关系的进程， 所以没有什么意义
+   PID TTY          TIME CMD
+  2413 pts/0    00:00:00 bash
+  4518 pts/0    00:00:00 su
+  4589 pts/0    00:00:00 su
+  4593 pts/0    00:00:00 bash
+  6568 pts/0    00:00:00 ps
+
+[root@centosx phobe]# ps -aux | grep mysqld
+mysql      1507  0.1 18.4 1123408 183588 ?      Sl   13:47   0:33 /usr/sbin/mysqld --daemonize --pid-file=/var/run/mysqld/mysqld.pid
+root       6557  0.0  0.0 112812   968 pts/0    S+   19:54   0:00 grep --color=auto mysql
+[1]+  Done                    sleep 100
+
+ps -aux 可以查看当前计算机运行的所有进程，然后再在里面检索 从而找到 Mysqld 的 pid 为 1507
+
