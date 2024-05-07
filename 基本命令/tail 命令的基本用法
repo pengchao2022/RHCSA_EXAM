@@ -1,0 +1,6 @@
+查看一个文件的后3行
+
+[root@centosm ~]# tail lisi.txt -n 3
+welcome to shanghai
+
+
