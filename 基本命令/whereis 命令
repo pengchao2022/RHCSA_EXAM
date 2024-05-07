@@ -1,0 +1,11 @@
+whereis 命令也可以显示命令的路径
+
+whereis useradd
+useradd: /usr/sbin/useradd /usr/share/man/man8/useradd.8.gz
+
+[root@centosm ~]# whereis systemctl
+systemctl: /usr/bin/systemctl /usr/share/man/man1/systemctl.1.gz
+
+[root@centosm ~]# whereis yum
+yum: /usr/bin/yum /etc/yum /etc/yum.conf /usr/share/man/man8/yum.8
+
