@@ -5,3 +5,7 @@ usermod -U  解锁用户
 usermod -g  主要组
 
 usermod -G  附加组
+
+将user100 加入到win10 组中
+
+usermod -G win10 user100
