@@ -1,0 +1,11 @@
+统计 / 根目录下的文件数
+
+[root@centosm ~]# ls / | wc -l
+19
+
+统计行数
+[root@centosm ~]# wc -l /etc/passwd
+44 /etc/passwd
+
+[root@centosm ~]# wc -l /etc/group
+72 /etc/group
