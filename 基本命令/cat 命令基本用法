@@ -1,0 +1,18 @@
+cat 后面加 -n 显示行号
+
+[root@centosm ~]# cat lisi.txt -n
+     1	helloworld
+     2	
+     3	this is just a test 
+     4	
+     5	it's very nice to see you today
+     6	
+     7	hope you are doing well
+     8	
+     9	have a good day
+    10	
+    11	see you later
+    12	
+    13	welcome to shanghai
+    14	
+    15	
