@@ -1,0 +1,24 @@
+date 命令 举例：
+
+[root@centosm ~]# date
+Tue May  7 08:05:47 CST 2024
+
+显示时间
+[root@centosm ~]# date +%R
+08:06
+
+显示日期
+[root@centosm ~]# date +%D
+05/07/24
+显示年份
+[root@centosm ~]# date +%Y
+2024
+显示月份
+[root@centosm ~]# date +%m
+05
+显示日期
+[root@centosm ~]# date +%d
+07
+显示星期
+[root@centosm ~]# date +%A
+Tuesday
