@@ -1,0 +1,6 @@
+pidof 命令可以直接找到进程的pid 号：
+
+[root@centosx phobe]# pidof mysqld
+1507
+[root@centosx phobe]# 
+
