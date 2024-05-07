@@ -1,0 +1,15 @@
+linux 的visudo 命令 可以给普通用户属于管理员权限：
+
+[root@centosx phobe]# visudo
+
+## The COMMANDS section may have other options added to it.
+##
+## Allow root to run any commands anywhere 
+root	ALL=(ALL) 	ALL
+phobe   ALL=(ALL)       ALL
+rita    ALL=(ALL)       ALL
+## Allows members of the 'sys' group to run networking, software, 
+## service management apps and more.
+
+当然也可以编辑/etc/sudoers 文件来授权给普通用户
+
