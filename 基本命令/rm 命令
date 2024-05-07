@@ -1,0 +1,10 @@
+删除一个文件
+
+[root@centosm kate]# rm -rf test.txt 
+
+删除一个空目录
+
+[root@centosm kate]# rm -rf hello/test2024/china/
+
+
+
