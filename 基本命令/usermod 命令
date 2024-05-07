@@ -1,0 +1,7 @@
+usermod -L  锁定用户
+
+usermod -U  解锁用户
+
+usermod -g  主要组
+
+usermod -G  附加组
