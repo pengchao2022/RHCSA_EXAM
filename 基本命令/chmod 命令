@@ -1,0 +1,13 @@
+给与其他人 写的权限：
+[root@centosx phobe]# ll lisi.txt 
+-rw-r--r--. 1 root root 5 May  7 17:19 lisi.txt
+[root@centosx phobe]# chmod o+w lisi.txt 
+[root@centosx phobe]# ll lisi.txt 
+-rw-r--rw-. 1 root root 5 May  7 17:19 lisi.txt
+
+rwx 
+r ----- 4
+w ----- 2
+x ----- 1
+
+
