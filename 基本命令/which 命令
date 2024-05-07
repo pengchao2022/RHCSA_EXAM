@@ -1,0 +1,10 @@
+which 命令可以显示某一个命令的 路径：
+
+[root@centosm ~]# which systemctl
+/usr/bin/systemctl
+
+[root@centosm ~]# which useradd
+/usr/sbin/useradd
+
+[root@centosm ~]# which passwd
+/usr/bin/passwd
