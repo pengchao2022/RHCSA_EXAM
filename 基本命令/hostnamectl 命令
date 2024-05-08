@@ -1,0 +1,10 @@
+hostnamectl 命令用于修改主机名：
+
+如：
+
+hostnamectl set-hostname centosm
+
+也可以通过修改hosts文件来修改主机名称：
+
+[root@centosx network-scripts]# vim /etc/hosts
+
