@@ -1,0 +1,27 @@
+tar 命令的格式：
+
+tar   目标    源
+
+例题： 将home 目录下面的所有文件打包到 /tmp 下，并用bzip2 进行压缩：
+
+[root@centosx tmp]# tar -cvjf /tmp/home.bz2 /home/
+
+c ------------ 表示创建
+v ------------ 表示显示输出过程
+j ------------ 表示用bzip2 进行压缩
+f ------------ 表示文件名
+
+解压bz2 压缩包：
+[root@centosx tmp]# tar -jxvf home.bz2 
+
+解压bz2 压缩包，并解压到/var 目录：
+[root@centosx /]# tar -jxvf home.bz2 -C /var/
+
+-------------------------------------------------
+[root@centosx tmp]# tar -cjvf /tmp/var.tar.bz2 /var/
+
+
+
+
+
+
