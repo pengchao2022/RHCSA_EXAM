@@ -18,7 +18,27 @@ f ------------ 表示文件名
 [root@centosx /]# tar -jxvf home.bz2 -C /var/
 
 -------------------------------------------------
+
+使用 bzip2 压缩
+
 [root@centosx tmp]# tar -cjvf /tmp/var.tar.bz2 /var/
+
+
+使用gzip 压缩
+
+[root@centosx tmp]# tar -zcvf /tmp/var2024.tar.gz /var/
+
+
+使用bizp2 解压到/home/pengchao 目录下：
+
+[root@centosx var]# tar -jxvf var.tar.bz2 -C /home/pengchao/
+
+
+使用gzip 解压到/home/kate 目录下：
+
+[root@centosx kate]# tar -zxvf var2024.tar.gz -C /home/kate/
+
+
 
 
 
