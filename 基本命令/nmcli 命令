@@ -51,6 +51,18 @@ rhcsa   e25c3516-35fb-432c-87f1-f52ed6b5a0f3  ethernet  ens33
 virbr0  d7894324-5849-4bac-b854-7e8fc6f3ed41  bridge    virbr0 
 ens33   51f6ae44-c274-445d-aa52-94a350fcde42  ethernet  --   
 
+修改连接的IPv4 地址：
+nmcli connection modify rhce ipv4.addresses 30.30.30.3/24 gw4 30.30.30.1 ipv4.dns 8.8.8.8 ipv4.method manual autoconnect yes
+
+-----------------------------------------------------------------------------------------------------------------------------
+创建一个名为 rhca 的连接，并指定IP 和DNS 和网关
+
+[root@centosx ~]# nmcli connection add con-name rhca ifname ens33 type ethernet ipv4.addresses 10.10.10.102/24 gw4 10.10.10.1 ipv4.dns 114.114.114.114 ipv4.method manual autoconnect yes 
+
+
+
+
+
 
 
 
