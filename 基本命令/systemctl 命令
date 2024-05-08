@@ -26,6 +26,19 @@ systemctl status mysqld --------查看mysqld 服务的状态
 systemctl start mysqld  -------- 启动mysqld 服务
 systemctl stop mysqld   -------- 停止mysqld 服务
 systemctl restart mysqld -------  重新启动mysqld 服务
+systemctl enable mysqld -------- 开机即启动mysqld 服务
+systemctl disable mysqld -------- 下次开机不会启动mysqld 服务
+
+----------------------------------------------------------
+
+屏蔽一个服务：
+systemctl mask mysqld
+解除屏蔽:
+systemctl unmask mysqld
+重新加载修改过的配置文件：
+systemctl daemon-reload
+
+
 
 
 
