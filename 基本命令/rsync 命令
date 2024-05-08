@@ -1,0 +1,52 @@
+rsync 命令也可以将本地文件copy 到远程主机，并且支持 增量copy
+
+如：
+
+[root@centosy rhce]# rsync -av /rhce/ root@192.168.19.150:/testrhca
+The authenticity of host '192.168.19.150 (192.168.19.150)' can't be established.
+ECDSA key fingerprint is SHA256:CokIAPsgn7ZWCIVnYmmbjy7Iv3hsjH8px7t9JOhBSQ4.
+ECDSA key fingerprint is MD5:cb:df:21:c5:8c:65:34:00:91:50:bf:99:b9:68:e6:03.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '192.168.19.150' (ECDSA) to the list of known hosts.
+root@192.168.19.150's password: 
+sending incremental file list
+created directory /testrhca
+./
+file1.c
+file2.c
+file3.c
+file4.c
+file5.c
+file6.c
+file7.c
+file8.c
+
+sent 486 bytes  received 203 bytes  55.12 bytes/sec
+total size is 0  speedup is 0.00
+[root@centosy rhce]# ls
+file1.c  file2.c  file3.c  file4.c  file5.c  file6.c  file7.c  file8.c
+[root@centosy rhce]# touch file{20..30}.txt
+[root@centosy rhce]# ls
+file1.c  file20.txt  file22.txt  file24.txt  file26.txt  file28.txt  file3.c     file4.c  file6.c  file8.c
+file2.c  file21.txt  file23.txt  file25.txt  file27.txt  file29.txt  file30.txt  file5.c  file7.c
+[root@centosy rhce]# rsync -av /rhce/ root@192.168.19.150:/testrhca
+root@192.168.19.150's password: 
+sending incremental file list
+./
+file20.txt
+file21.txt
+file22.txt
+file23.txt
+file24.txt
+file25.txt
+file26.txt
+file27.txt
+file28.txt
+file29.txt
+file30.txt
+
+sent 800 bytes  received 228 bytes  97.90 bytes/sec
+total size is 0  speedup is 0.00
+
+
+
