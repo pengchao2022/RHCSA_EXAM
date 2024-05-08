@@ -1,0 +1,7 @@
+awk 命令可进行统计，
+如显示IP 地址：
+[pengchao@centosx ~]$ ip a | grep -w 'inet' | awk '{print $2}'
+127.0.0.1/8
+192.168.19.150/24
+192.168.122.1/24
+[pengchao@centosx ~]$ 
