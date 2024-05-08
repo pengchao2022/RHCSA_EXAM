@@ -1,0 +1,4 @@
+SCP 命令可以将本机的文件传输给远程主机：
+
+pengchao@PengChaos-MacBook-Pro Downloads % scp CentOS-7-x86_64-DVD-2009.iso root@192.168.19.150:/home/pengchao
+
