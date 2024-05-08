@@ -31,3 +31,18 @@ Africa/Cairo
 Africa/Casablanca
 Africa/Ceuta
 Africa/Conakry
+
+启用 Ntp 服务：
+
+[root@centosx log]# timedatectl set-ntp true
+
+禁用 Ntp 服务：
+
+[root@centosx log]# timedatectl set-ntp false
+
+设置时间：
+
+[root@centosx log]# timedatectl set-time 9:0:0
+
+注意： 手动设置时间时 需要先禁用ntp 服务
+
