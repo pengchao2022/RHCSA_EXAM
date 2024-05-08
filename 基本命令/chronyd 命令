@@ -1,0 +1,44 @@
+chronyd 的配置文件：
+
+[root@centosx log]# cat /etc/chrony.conf 
+# Use public servers from the pool.ntp.org project.
+# Please consider joining the pool (http://www.pool.ntp.org/join.html).
+server 0.centos.pool.ntp.org iburst
+server 1.centos.pool.ntp.org iburst
+server 2.centos.pool.ntp.org iburst
+server 3.centos.pool.ntp.org iburst
+
+重启 chronyd 服务：
+
+[root@centosx log]# systemctl restart chronyd
+
+查看chronyd 服务的状态：
+
+[root@centosx log]# systemctl status chronyd
+● chronyd.service - NTP client/server
+   Loaded: loaded (/usr/lib/systemd/system/chronyd.service; enabled; vendor preset: enabled)
+   Active: active (running) since Wed 2024-05-08 13:30:52 CST; 5s ago
+     Docs: man:chronyd(8)
+           man:chrony.conf(5)
+  Process: 17681 ExecStartPost=/usr/libexec/chrony-helper update-daemon (code=exited, status=0/SUCCESS)
+  Process: 17675 ExecStart=/usr/sbin/chronyd $OPTIONS (code=exited, status=0/SUCCESS)
+ Main PID: 17679 (chronyd)
+
+获取 更多Ntp 服务的详细说明可以使用
+[root@centosx log]# chronyc sources -v
+210 Number of sources = 4
+
+  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.
+ / .- Source state '*' = current synced, '+' = combined , '-' = not combined,
+| /   '?' = unreachable, 'x' = time may be in error, '~' = time too variable.
+||                                                 .- xxxx [ yyyy ] +/- zzzz
+||      Reachability register (octal) -.           |  xxxx = adjusted offset,
+||      Log2(Polling interval) --.      |          |  yyyy = measured offset,
+||                                \     |          |  zzzz = estimated error.
+||                                 |    |           \
+MS Name/IP address         Stratum Poll Reach LastRx Last sample               
+===============================================================================
+^? tick.ntp.infomaniak.ch        1   6    35    95  -2973us[  -13ms] +/-  166ms
+^? ntp8.flashdance.cx            2   6     1    31  -4112us[-4112us] +/-  181ms
+^* 139.199.215.251               2   6    37    35    -21ms[  -31ms] +/-   66ms
+^? time.cloudflare.com           3   6    35    97    +26ms[  +16ms] +/-  134ms
