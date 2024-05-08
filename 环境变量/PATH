@@ -1,0 +1,40 @@
+在 Linux 里面有环境变量
+查看当前用户的PATH 变量值可以用：
+echo $PATH
+/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/phobe/.local/bin:/home/phobe/bin
+
+
+举例说明
+
+[root@centosx ~]# chmod +x shell04.sh  ----- shell 脚本 shell04.sh 可以在当前目录成功执行，因为当前目录下面就有这个文件
+[root@centosx ~]# ./shell04.sh 
+Please type your name here:allen
+your name is: allen
+
+如果切换到其他目录，则shell04.sh 脚本不能再执行，因为当前目录并没有这个脚本文件，会报错：
+[root@centosx ~]# cd /home/pengchao/
+[root@centosx pengchao]# shell04.sh
+bash: shell04.sh: command not found...
+
+为了让shell04 脚本可以在任意位置执行，有两种办法：
+1 将shell04.sh 脚本copy 到/usr/bin 二进制文件库里 
+  
+[root@centosx ~]# cp shell04.sh /usr/bin
+[root@centosx ~]# shell04.sh   -------------------- 可以看到此时 该脚本已经顺利执行
+Please type your name here:kate
+your name is: kate                       
+[root@centosx ~]#  
+
+2 可以将存放shell脚本文件的目录写入PATH 环境变量中，这样也可以实现在哪儿都可以运行该脚本：
+
+[pengchao@centosx ~]$ export PATH=/home/pengchao/Documents:$PATH    ---------- 将存放shell2024.sh 的路径 /home/pengchao/Documents 写入环境变量PATH 中
+[pengchao@centosx ~]$ 
+[pengchao@centosx ~]$ 
+[pengchao@centosx ~]$ echo $PATH
+/home/pengchao/Documents:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/pengchao/.local/bin:/home/pengchao/bin
+[pengchao@centosx ~]$ shell2024.sh
+Please enter your firstname here:kk
+Please enter your lastname here:uu
+your name is:kk uu
+
+
