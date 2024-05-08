@@ -1,0 +1,15 @@
+gzip 可以对文件进行压缩：
+
+[root@centosx log]# gzip messages
+[root@centosx log]# ll -h messages.gz 
+-rw-------. 1 root root 78K May  8 17:40 messages.gz
+
+gzip 压缩后原文件不再保留
+
+
+gzip 对.gz 文件进行解压：
+
+[root@centosx log]# gzip -d messages.gz
+[root@centosx log]# ll -h | grep messages 
+-rw-------. 1 root   root   594K May  8 17:40 messages
+
