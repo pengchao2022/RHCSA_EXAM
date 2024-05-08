@@ -1,0 +1,10 @@
+bzip2 命令可以对原文件进行压缩，压缩后可以保留原文件
+
+[root@centosx log]# bzip2 -k messages
+[root@centosx log]# ll -h | grep messages
+-rw-------. 1 root   root   594K May  8 17:40 messages
+-rw-------. 1 root   root    50K May  8 17:40 messages.bz2
+
+bzip2 -d 命令对原文件进行解压
+
+[root@centosx log]# bzip2 -d messages.bz2 
