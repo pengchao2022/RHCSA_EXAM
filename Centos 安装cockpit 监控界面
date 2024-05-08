@@ -1,0 +1,29 @@
+安装社区版yum 源
+
+yum install epel-release
+
+安装cockpit
+
+yum install cockpit
+
+启动服务：
+
+systemctl start cockpit
+
+开机自启动：
+
+systemctl enable cockpit.socket
+
+设置防火墙：
+
+firewall-cmd --add-service=cockpit
+
+firewall-cmd --add-service=cockpit --permanent
+
+firewall-cmd --reload
+
+浏览器登录：
+
+https://SERVER_IP:9090 
+
+https://192.168.19.160:9090 
