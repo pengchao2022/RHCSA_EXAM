@@ -12,4 +12,32 @@ May  8 10:50:11 centosx su: pam_unix(su:session): session opened for user root b
 
 日志端口号为 ： 514 
 
+检查日志服务：
+[root@centosx log]# systemctl status rsyslog
+● rsyslog.service - System Logging Service
+   Loaded: loaded (/usr/lib/systemd/system/rsyslog.service; enabled; vendor preset: enabled)
+   Active: active (running) since Tue 2024-05-07 13:22:20 CST; 23h ago
+     Docs: man:rsyslogd(8)
+           http://www.rsyslog.com/doc/
+ Main PID: 1054 (rsyslogd)
+    Tasks: 3
+   CGroup: /system.slice/rsyslog.service
+           └─1054 /usr/sbin/rsyslogd -n
+
+重启日志服务：
+
+[root@centosx log]# systemctl restart rsyslog
+[root@centosx log]# systemctl status rsyslog
+● rsyslog.service - System Logging Service
+   Loaded: loaded (/usr/lib/systemd/system/rsyslog.service; enabled; vendor preset: enabled)
+   Active: active (running) since Wed 2024-05-08 12:58:50 CST; 10s ago
+     Docs: man:rsyslogd(8)
+           http://www.rsyslog.com/doc/
+ Main PID: 17060 (rsyslogd)
+    Tasks: 3
+   CGroup: /system.slice/rsyslog.service
+           └─17060 /usr/sbin/rsyslogd -n
+
+
+
 
