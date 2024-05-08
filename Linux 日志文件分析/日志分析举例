@@ -10,4 +10,6 @@ May  8 10:49:10 centosx su: pam_unix(su-l:session): session opened for user peng
 May  8 10:50:00 centosx passwd: pam_unix(passwd:chauthtok): authentication failure; logname= uid=1000 euid=0 tty=pts/0 ruser= rhost=  user=pengchao
 May  8 10:50:11 centosx su: pam_unix(su:session): session opened for user root by root(uid=1000)
 
+日志端口号为 ： 514 
+
 
