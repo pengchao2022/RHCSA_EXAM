@@ -1,0 +1,45 @@
+mount 命令用于挂在外接盘
+
+如 ： 将 DVD iso 镜像进行挂载 ：
+
+先建立一个挂载点：
+mkdir /media/iso
+
+查看DVD镜像的盘符及UUID:
+[root@centosx iso]# blkid
+/dev/sr0: UUID="2020-11-04-11-36-43-00" LABEL="CentOS 7 x86_64" TYPE="iso9660" PTTYPE="dos" 
+/dev/sda1: UUID="4dcfc15a-67a6-454b-b525-7200eee599cb" TYPE="xfs" 
+/dev/sda2: UUID="84f79e34-04d1-40fe-8cfc-ab780c4343c1" TYPE="swap" 
+/dev/sda3: UUID="6f35a55a-1500-49cb-90b3-237dffdd8240" TYPE="xfs" 
+
+挂载：
+[root@centosx iso]# mount /dev/sr0 /media/iso/
+
+查看镜像：
+root@centosx iso]# ls /media/iso/
+CentOS_BuildTag  EFI  EULA  GPL  LiveOS  Packages  RPM-GPG-KEY-CentOS-7  RPM-GPG-KEY-CentOS-Testing-7  TRANS.TBL  images  isol
+
+要使镜像挂载点永久生效，需要编辑 /etc/fstab 文件：
+[root@centosx iso]# vim /etc/fstab 
+
+将DVD的UUID 写入 fstab 文件：
+#
+# /etc/fstab
+# Created by anaconda on Sun May  5 20:08:17 2024
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk'
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+#
+UUID=6f35a55a-1500-49cb-90b3-237dffdd8240 /                       xfs     defaults        0 0
+UUID=4dcfc15a-67a6-454b-b525-7200eee599cb /boot                   xfs     defaults        0 0
+UUID=84f79e34-04d1-40fe-8cfc-ab780c4343c1 swap                    swap    defaults        0 0
+UUID=2020-11-04-11-36-43-00               /media/iso              9660    defaults        0 0
+~                                                
+
+这样即可完成挂载
+
+
+
+
+
+
