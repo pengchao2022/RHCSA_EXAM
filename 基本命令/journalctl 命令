@@ -1,0 +1,29 @@
+ journalctl 命令用于查看日志文件
+
+如查看所有错误日志文件：
+
+ journalctl -p err
+-- Logs begin at Tue 2024-05-07 13:21:49 CST, end at Wed 2024-05-08 13:10:01 CST. --
+May 07 13:21:51 localhost.localdomain kernel: sd 0:0:0:0: [sda] Assuming drive cache: write through
+May 07 13:21:59 centosx kernel: piix4_smbus 0000:00:07.3: SMBus Host Controller not enabled!
+May 07 13:22:21 centosx systemd[1]: Failed to start Crash recovery kernel arming.
+May 07 13:22:42 centosx spice-vdagent[1711]: Cannot access vdagent virtio channel /dev/virtio-ports/com.redhat.spice.0
+May 07 13:22:42 centosx spice-streaming-agent[1712]: Failed to open the streaming device "/dev/virtio-ports/org.spice-space.stream.0": 
+May 07 16:40:56 centosx sudo[4557]:    phobe : Account or password is expired, reset your password and try again ; TTY=pts/0 ; PWD=/hom
+May 07 16:41:09 centosx sudo[4557]:    phobe : unable to change expired password: Authentication token manipulation error ; TTY=pts/0 ;
+May 07 16:41:38 centosx sudo[4572]:    phobe : Account or password is expired, reset your password and try again ; TTY=pts/0 ; PWD=/hom
+May 07 16:41:48 centosx sudo[4572]:    phobe : unable to change expired password: Authentication token manipulation error ; TTY=pts/0 ;
+May 07 20:15:05 centosx systemd[1]: [/usr/lib/systemd/system/mdcheck_start.timer:12] Failed to parse calendar specification, ignoring: 
+May 07 20:15:05 centosx systemd[1]: mdcheck_start.timer lacks value setting. Refusing.
+May 07 20:18:24 centosx vsftpd[702
+
+查看最后 5 行日志文件：
+
+[root@centosx log]# journalctl -n 5
+-- Logs begin at Tue 2024-05-07 13:21:49 CST, end at Wed 2024-05-08 13:10:01 CST. --
+May 08 13:01:09 centosx chronyd[608]: Selected source 202.112.29.82
+May 08 13:01:09 centosx chronyd[608]: Source 202.112.29.82 replaced with 117.80.231.60
+May 08 13:01:25 centosx chronyd[608]: Selected source 95.111.202.5
+May 08 13:10:01 centosx systemd[1]: Started Session 110 of user root.
+May 08 13:10:01 centosx CROND[17230]: (root) CMD (/usr/lib64/sa/sa1 1 1)
+[root@centosx log]# 
