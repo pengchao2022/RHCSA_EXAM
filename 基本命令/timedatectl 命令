@@ -1,0 +1,13 @@
+timedatectl 命令 用于设置时区
+
+[root@centosx log]# timedatectl set-timezone Asia/Shanghai
+
+[root@centosx log]# timedatectl 
+      Local time: Wed 2024-05-08 13:20:40 CST
+  Universal time: Wed 2024-05-08 05:20:40 UTC
+        RTC time: Wed 2024-05-08 05:20:40
+       Time zone: Asia/Shanghai (CST, +0800)
+     NTP enabled: yes
+NTP synchronized: yes
+ RTC in local TZ: no
+      DST active: n/a
