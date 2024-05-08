@@ -1,0 +1,90 @@
+关于文件系统
+
+inode 节点
+在linux 中 任何文件和目录都有唯一的节点号 ，不可以重复
+
+[root@centosy rhce]# df -i   可以查看节点号
+Filesystem      Inodes  IUsed   IFree IUse% Mounted on
+devtmpfs        120492    389  120103    1% /dev
+tmpfs           124432      1  124431    1% /dev/shm
+tmpfs           124432    961  123471    1% /run
+tmpfs           124432     16  124416    1% /sys/fs/cgroup
+/dev/sda3      9283072 166091 9116981    2% /
+/dev/sda1       153600    346  153254    1% /boot
+tmpfs           124432     21  124411    1% /run/user/1000
+tmpfs           124432      1  124431    1% /run/user/0
+[root@centosy rhce]# 
+
+[root@centosy dev]# ls -i ----------------------------------- 每个文件都有一个节点号 ， 不管是目录 还是文件
+ 8630 agpgart           8627 hpet                 8628 nvram     10778 sr0      6549 tty22   6568 tty41   6587 tty60    22231 vcs4
+ 8617 autofs           14113 hugepages            6520 oldmem    10781 sr1      6550 tty23   6569 tty42   6588 tty61    22233 vcs5
+10637 block             8629 hwrng                6514 port       8861 stderr   6551 tty24   6570 tty43   6589 tty62    22235 vcs6
+10568 bsg              14125 initctl             15070 ppp        8859 stdin    6552 tty25   6571 tty44   6590 tty63     6525 vcsa
+15243 btrfs-control     8661 input                8620 ptmx       8860 stdout   6553 tty26   6572 tty45   6534 tty7      6527 vcsa1
+ 8647 bus               6519 kmsg                    1 pts        6521 tty      6554 tty27   6573 tty46   6535 tty8     22223 vcsa2
+16535 cdrom             9157 log                  6517 random     6523 tty0     6555 tty28   6574 tty47   6536 tty9     22230 vcsa3
+ 9836 char             15184 loop-control         8625 raw        6528 tty1     6556 tty29   6575 tty48   8621 ttyS0    22232 vcsa4
+ 6522 console          15177 lp0                 16489 rfkill     6537 tty10    6530 tty3    6576 tty49   8622 ttyS1    22234 vcsa5
+ 8857 core             15099 lp1                 10292 rtc        6538 tty11    6557 tty30   6532 tty5    8623 ttyS2    22236 vcsa6
+ 8593 cpu              15185 lp2                  8664 rtc0       6539 tty12    6558 tty31   6577 tty50   8624 ttyS3    15069 vfio
+ 8814 cpu_dma_latency  15181 lp3                 10576 sda        6540 tty13    6559 tty32   6578 tty51  15180 uhid        24 vga_arbiter
+ 8631 crash             9429 mapper              10577 sda1       6541 tty14    6560 tty33   6579 tty52  15178 uinput   15183 vhci
+10639 disk              8801 mcelog              10578 sda2       6542 tty15    6561 tty34   6580 tty53   6518 urandom  15179 vhost-net
+17201 dmmidi            6512 mem                 10579 sda3       6543 tty16    6562 tty35   6581 tty54   8636 usbmon0  16442 vmci
+10587 dri              17200 midi                16454 sg0        6544 tty17    6563 tty36   6582 tty55   8641 usbmon1  19879 vsock
+10631 fb0               8618 mqueue              16455 sg1        6545 tty18    6564 tty37   6583 tty56   8656 usbmon2   6515 zero
+ 8858 fd                9427 net                 16456 sg2        6546 tty19    6565 tty38   6584 tty57   6524 vcs
+ 6516 full              8815 network_latency      8843 shm        6529 tty2     6566 tty39   6585 tty58   6526 vcs1
+ 9431 fuse              8816 network_throughput   8597 snapshot   6547 tty20    6531 tty4    6586 tty59  22222 vcs2
+10051 hidraw0           6513 null                15100 snd        6548 tty21    6567 tty40   6533 tty6   22224 vcs3
+[root@centosy dev]# 
+
+当我们新建文件的时候，系统会自动给我们分配一个节点号 
+
+[root@centosy dev]# touch abc
+[root@centosy dev]# ls -i abc
+208102 abc   ------ abc 的节点号
+[root@centosy dev]# ls -l abc
+-rw-r--r--. 1 root root 0 May  8 22:49 abc ----------- 这里的 1 表示的连接数目
+[root@centosy dev]# ln abc 123  ---------------------- 给abc 做一个硬连接 123
+[root@centosy dev]# ll abc
+-rw-r--r--. 2 root root 0 May  8 22:49 abc  ---------- 现在数字变为2 表示abc 有一个软连接
+
+[root@centosy dev]# echo "hello,allen" > abc
+[root@centosy dev]# cat 123  -------------------------- 可以看到硬连接 123 里面也是有 hello,allen 的
+hello,allen
+
+[root@centosy dev]# ls -i 123
+208102 123           ---------------------------------- 查看123 的节点号，会发现 123 的节点号 和 abc 的节点号是相同的
+
+注意当删除 abc 时 123 照样可以使用，当删除123 时 ，abc 也依然可以使用，----- 硬链接删除的只是链接号
+
+硬链接的缺点 1， 不能给目录做硬链接
+           2， 不能跨分区
+           3， 硬链接使用的少
+-------------------------
+
+软连接使用的场景多：
+
+[root@centosy rhcca]# ls
+[root@centosy rhcca]# touch chinaunix.c
+[root@centosy rhcca]# ln -s chinaunix.c mycfie
+[root@centosy rhcca]# ll -i chinaunix.c 
+35629975 -rw-r--r--. 1 root root 0 May  8 23:03 chinaunix.c           ------------------------ 可以看到chinaunix.c 的节点号为：35629975      
+[root@centosy rhcca]# ll -i mycfie 
+35629978 lrwxrwxrwx. 1 root root 11 May  8 23:04 mycfie -> chinaunix.c  ----------------------  可以看到软链接 mycfile 的节点号为： 35629978 
+
+                                                                                                 两个文件的节点号是不同的
+
+软链接的话，删除原文件，链接文件也不可以使用了 
+
+软链接的话，删除链接文件，原文件依然可以使用
+
+硬连接的话，删除原文件，链接文件依然可以使用
+
+
+
+
+
+
+
