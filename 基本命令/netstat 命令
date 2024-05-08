@@ -1,0 +1,18 @@
+netstat 命令用于检查连接
+
+[root@centosx network-scripts]# netstat -ntlpa
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      1376/master         
+tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN      675/rpcbind         
+tcp        0      0 192.168.122.1:53        0.0.0.0:*               LISTEN      1257/dnsmasq        
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      1043/sshd           
+tcp        0      0 127.0.0.1:631           0.0.0.0:*               LISTEN      1045/cupsd          
+tcp        0      0 192.168.19.150:22       192.168.19.1:53140      ESTABLISHED 2408/sshd: root@pts 
+tcp6       0      0 ::1:25                  :::*                    LISTEN      1376/master         
+tcp6       0      0 :::3306                 :::*                    LISTEN      13827/mysqld        
+tcp6       0      0 :::111                  :::*                    LISTEN      675/rpcbind         
+tcp6       0      0 :::21                   :::*                    LISTEN      7327/vsftpd         
+tcp6       0      0 :::22                   :::*                    LISTEN      1043/sshd           
+tcp6       0      0 ::1:631                 :::*                    LISTEN      1045/cupsd          
+[root@centosx network-scripts]# 
