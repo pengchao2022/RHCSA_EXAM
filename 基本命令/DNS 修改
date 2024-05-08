@@ -1,0 +1,3 @@
+可以通过执行 以下命令来修改DNS
+
+[root@centosx network-scripts]# vim /etc/resolv.conf 
