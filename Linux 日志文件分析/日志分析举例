@@ -1,0 +1,13 @@
+[root@centosx log]# tail -f /var/log/secure   
+May  8 08:57:28 centosx polkitd[612]: Unregistered Authentication Agent for unix-process:13987:3908075 (system bus name :1.335, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+May  8 08:57:34 centosx polkitd[612]: Registered Authentication Agent for unix-process:14024:3908724 (system bus name :1.336 [/usr/bin/pkttyagent --notify-fd 5 --fallback], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+May  8 08:57:34 centosx polkitd[612]: Unregistered Authentication Agent for unix-process:14024:3908724 (system bus name :1.336, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+May  8 10:00:57 centosx su: pam_unix(su:session): session opened for user pengchao by root(uid=0)
+May  8 10:01:08 centosx su: pam_unix(su:session): session opened for user root by root(uid=1000)
+May  8 10:01:12 centosx su: pam_unix(su-l:session): session opened for user pengchao by root(uid=0)
+May  8 10:48:07 centosx su: pam_unix(su:session): session opened for user root by root(uid=1000)
+May  8 10:49:10 centosx su: pam_unix(su-l:session): session opened for user pengchao by root(uid=0)
+May  8 10:50:00 centosx passwd: pam_unix(passwd:chauthtok): authentication failure; logname= uid=1000 euid=0 tty=pts/0 ruser= rhost=  user=pengchao
+May  8 10:50:11 centosx su: pam_unix(su:session): session opened for user root by root(uid=1000)
+
+
