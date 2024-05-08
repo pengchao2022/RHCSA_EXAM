@@ -1,0 +1,67 @@
+SUID  ------  当运行一个命令时 使用的是该命令的拥有人的权限去执行 而不是执行者自己的权限
+      ------- 当运行 passwd 命令时，使用的是该命令的拥有者 root 的权限去执行 ，而不是 执行者 pengchao 自己的权限 ，所有普通用户pengchao可以自己给自己修改密码。
+
+[root@centosx ~]# ll /etc/shadow
+----------. 1 root root 1447 May  7 16:44 /etc/shadow
+
+[root@centosx ~]# ll /usr/bin/passwd
+-rwsr-xr-x. 1 root root 27856 Apr  1  2020 /usr/bin/passwd   ----------- 注意看 owner 用户这里出现了 rws  所以是SUID 如果 s 出现在了group 里面，那么就是 SGID 
+                                                             ----------- 如果这里面没有 s 权限，那么普通用户将不能自己修改自己的密码
+                                                             -----------  在这里 s 的数字是 4 ， r 的数字是4 ， w的数字是 2 ， x 的数字是 1
+
+            
+SGID  ------ 这个主要是给目录使用的，使用命令 chmod g+s directory 然后可以让以后在 directory 里面建立的目录和文件都集成 directory 的组
+      ------ SGID 是数字2 
+      ------- SGID 只能对拥有组进行继承，而不能对拥有人进行继承 
+      ------- 默认情况下 ，目录是没有继承权限的，子目录默认并不继承父目录的权限，只有再使用 chmod g+s 后才可以进行继承
+
+[root@centosx ~]# ls -ld RHCSA/
+drwxr-xr-x. 2 root root 6 May  8 10:59 RHCSA/
+[root@centosx ~]# chgrp pengchao RHCSA/
+[root@centosx ~]# ls -ld RHCSA/
+drwxr-xr-x. 2 root pengchao 6 May  8 10:59 RHCSA/
+[root@centosx ~]# cd RHCSA/
+[root@centosx RHCSA]# touch exam.sh
+[root@centosx RHCSA]# ll exam.sh 
+-rw-r--r--. 1 root root 0 May  8 11:01 exam.sh
+[root@centosx RHCSA]# cd ..
+[root@centosx ~]# chmod g+s RHCSA/
+[root@centosx ~]# cd RHCSA/
+[root@centosx RHCSA]# ls
+exam.sh
+[root@centosx RHCSA]# touch hello.c
+[root@centosx RHCSA]# ll hello.c 
+-rw-r--r--. 1 root pengchao 0 May  8 11:03 hello.c
+
+现在查看 RHCSA 的权限可以看到 多了一个 s
+[root@centosx ~]# ll | grep RHCSA
+drwxr-sr-x. 2 root pengchao   36 May  8 11:03 RHCSA   ---------  这里s 是数字 2
+
+
+t 类型，安全位  t 为sticky 的缩写  ---- 表示只有文件的所有者和root 才能删除该目录中的文件，其他人不可以删除
+
+[root@centosx ~]# ll / | grep tmp
+drwxrwxrwt.  19 root root  4096 May  8 11:03 tmp      --------- 可以看到 /tmp 文件末尾有 t  权限
+
+[root@centosx ~]# ls -ld /tmp
+drwxrwxrwt. 19 root root 4096 May  8 11:03 /tmp       t 的数字是 1
+
+--------------------------------------------------------------------------
+
+数字权限表示：
+
+[root@centosx ~]# ll /usr/bin/passwd 
+-rwsr-xr-x. 1 root root 27856 Apr  1  2020 /usr/bin/passwd  ----------- 权限是4755
+
+
+[root@centosx ~]# ls -ld /tmp
+drwxrwxrwt. 19 root root 4096 May  8 11:03 /tmp    -------------- 权限是1777
+
+
+[root@centosx ~]# ll | grep RHCSA
+drwxr-sr-x. 2 root pengchao   36 May  8 11:03 RHCSA    ---------- 权限是 2755
+
+
+
+
+
