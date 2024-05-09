@@ -15,3 +15,7 @@ v - verbose (using or expressed in more words than are needed)
 h - hash (Print 50 hash marks as the package archive is unpacked)
 U - upgrade (This upgrades or installs the package currently installed to a newer version. This is the same as install, except all other version(s) of the package are removed after the new package is installed)
 
+--------------------------------
+
+rpm -qa 查询：
+
