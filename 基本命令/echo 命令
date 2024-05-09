@@ -1,0 +1,32 @@
+echo 命令用于显示内容：
+
+显示一个 \
+
+方法一： 
+[root@centosx ~]# echo \\
+\
+
+方法二：
+[root@centosx ~]# echo '\'
+\
+
+显示美元符号：
+[root@centosx ~]# echo '$4'
+$4
+
+注意： \ and ' ' 可以屏蔽任何字符， 不要用双引号“ ”
+
+echo 命令默认换行，echo 不换行可以用：
+[root@centosx ~]# echo -n "helloworld"
+helloworld[root@centosx ~]# 
+
+echo 制表符：
+
+[root@centosx ~]# echo -e a'\t'b
+a	    b
+
+echo 输出并建立文件：
+[root@centosx ~]# echo "hello,pengchao" > 1.txt
+[root@centosx ~]# cat 1.txt 
+hello,pengchao
+
