@@ -1,0 +1,23 @@
+grep 命令用于检索，这里主要说明一下 grep -v grep 命令的使用：
+
+grep -v grep 命令用于显示除了 grep 进程本身外的所有进程：
+
+例题：
+
+[root@centosx ~]# ps -ef | grep mysqld | grep -v grep
+mysql     86110      1  0 06:36 ?        00:00:03 /usr/sbin/mysqld --daemonize --pid-file=/var/run/mysqld/mysqld.pid
+[root@centosx ~]# 
+
+
+[root@centosx ~]# ps -ef | grep vsftpd | grep -v grep
+root      85786      1  0 06:25 ?        00:00:00 /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf
+[root@centosx ~]# 
+
+[root@centosx ~]# ps -ef | grep sshd | grep -v grep
+root       1995      1  0 May09 ?        00:00:00 sshd: root@pts/0
+root      26799      1  0 00:49 ?        00:00:00 /usr/sbin/sshd -D
+root      70567  26799  0 01:00 ?        00:00:08 sshd: root@pts/2
+root      74259  26799  0 06:17 ?        00:00:02 sshd: root@pts/1
+[root@centosx ~]# 
+
+
