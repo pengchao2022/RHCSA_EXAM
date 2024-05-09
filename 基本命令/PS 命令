@@ -16,3 +16,18 @@ root       6557  0.0  0.0 112812   968 pts/0    S+   19:54   0:00 grep --color=a
 
 ps -aux 可以查看当前计算机运行的所有进程，然后再在里面检索 从而找到 Mysqld 的 pid 为 1507
 
+--------------------------
+使用grep -v grep 可以显示除了 grep 命令以外的所有进程， 举例说明：
+
+[root@centosx ~]# ps -ef | grep httpd | grep -v grep
+root      86545      1  0 06:49 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache    86561  86545  0 06:50 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache    86562  86545  0 06:50 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache    86563  86545  0 06:50 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache    86564  86545  0 06:50 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache    86565  86545  0 06:50 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache    86580  86545  0 06:50 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache    86581  86545  0 06:50 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache    86582  86545  0 06:50 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache    86583  86545  0 06:50 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache    86584  86545  0 06:50 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
