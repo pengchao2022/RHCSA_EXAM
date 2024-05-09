@@ -1,0 +1,4 @@
+更新系统：
+
+[root@centosx ~]# yum update -y
+
