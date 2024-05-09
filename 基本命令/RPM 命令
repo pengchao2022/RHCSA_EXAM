@@ -1,0 +1,17 @@
+首先安装rpm-build 包
+
+[root@centosx ~]# yum install rpm-build
+
+接下来我们用 安装apache 的rpm 来熟悉RPM 命令 ：
+rpm -Uvh /home/user/httpd-2.4.52/*.rpm
+Replace -Uvh with -ivh if you are doing a fresh install, in my cases I am doing an upgrade from old apache server.
+
+
+
+Below are the list of options info for your reference:
+
+i - install (This installs a new package)
+v - verbose (using or expressed in more words than are needed)
+h - hash (Print 50 hash marks as the package archive is unpacked)
+U - upgrade (This upgrades or installs the package currently installed to a newer version. This is the same as install, except all other version(s) of the package are removed after the new package is installed)
+
