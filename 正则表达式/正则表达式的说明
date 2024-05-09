@@ -20,4 +20,42 @@ httpd-2.4.59-1.codeit.el7.x86_64.rpm  mysqlservice.sh    service24.sh
 [^abc] 表示排除 abc
 ^abc   表示以 abc 开头
 $abc   表示以 abc 结尾
+^$     表示 匹配空白行
+例题，看文件内容的时候，把空白行过滤掉：
+[root@centosx ~]# cat kongbai.txt 
+90
+67
+
+
+
+56
+
+987
+
+87y
+
+
+[root@centosx ~]# cat kongbai.txt | grep -v ^$
+90
+67
+56
+987
+87y
+[root@centosx ~]# 
+------------------------
+只想看 /etc/passwd 文件里 带有root 的第一行，及以root 开始的行：
+[root@centosx ~]# cat /etc/passwd | grep ^root
+root:x:0:0:root:/root:/bin/bash
+[root@centosx ~]# 
+
+
+精准匹配以root 开头的命令：
+[root@centosx ~]# cat /etc/passwd | grep "^\<root\>"
+root:x:0:0:root:/root:/bin/bash
+[root@centosx ~]# 
+
+[root@centosx ~]# cat /etc/passwd | grep "^root\>"
+root:x:0:0:root:/root:/bin/bash
+[root@centosx ~]# 
+
 
