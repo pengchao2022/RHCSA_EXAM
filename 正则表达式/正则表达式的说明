@@ -1,0 +1,23 @@
+标准正则表达式：标准正则使用 grep 命令
+
+ grep 命令
+
+正则表达式里面的* 表示重复前一个字符 0-N 次 ，并不是匹配所有
+
+通配符匹配的是文件的名字，而正则匹配的是文件的内容，如：
+
+[root@centosx ~]# ls *
+1.txt                                 httpd-filesystem-2.4.59-1.codeit.el7.noarch.rpm  oev.sh         user10.sh
+apache1.sh                            httpd-tools-2.4.59-1.codeit.el7.x86_64.rpm       ping1.sh       user20withpasswd.sh
+even.sh                               mod_http2-2.0.27-1.codeit.el7.x86_64.rpm         run.sh
+host1.sh                              mod_ssl-2.4.59-1.codeit.el7.x86_64.rpm           serverping.sh
+httpd-2.4.59-1.codeit.el7.x86_64.rpm  mysqlservice.sh    service24.sh
+
+
+扩展正则表达式： 扩展正则使用 egrep 命令
+后面参数 带 . 或者 + 
+
+[^abc] 表示排除 abc
+^abc   表示以 abc 开头
+$abc   表示以 abc 结尾
+
