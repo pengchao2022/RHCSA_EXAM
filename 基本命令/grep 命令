@@ -20,4 +20,51 @@ root      70567  26799  0 01:00 ?        00:00:08 sshd: root@pts/2
 root      74259  26799  0 06:17 ?        00:00:02 sshd: root@pts/1
 [root@centosx ~]# 
 
+----------------------------------------------
+grep -c 表示统计，例如 要统计/etc/passwd 文件里，root 有几行：
+[root@centosx ~]# grep -c root /etc/passwd
+2
+
+grep -i 表示忽略大小写：
+[root@centosx ~]# grep -i h /home/pengchao/eng.txt 
+Hello this is my work place
+hello
+
+grep -v 指的是排除：
+[root@centosx ~]# grep -v root /etc/passwd  -------- 排除 含有 root 的行
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+
+grep -n 指的是在匹配的基础上显示出行号：
+[root@centosx ~]# grep -n root /etc/passwd
+1:root:x:0:0:root:/root:/bin/bash
+10:operator:x:11:0:operator:/root:/sbin/nologin
+
+grep -A 命令，A表示 after ，表示在匹配的基础上，打印出匹配后的后面两行，如：
+[root@centosx ~]# grep -A2 root /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+--
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+
+grep -B 命令， B表示 before, 表示在匹配的基础上，打印出匹配的前面两行，如：
+[root@centosx ~]# grep -B2 root /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+--
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+
+
+
+
+
+
+
 
