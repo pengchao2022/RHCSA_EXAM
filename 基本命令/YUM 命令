@@ -1,0 +1,38 @@
+yum -y update ------ 来更新系统软件包
+
+
+将DVD 挂载到 /media/iso 下面
+
+cd /media/iso
+[root@control iso]# ls
+CentOS_BuildTag  EULA  LiveOS    RPM-GPG-KEY-CentOS-7          TRANS.TBL  isolinux
+EFI              GPL   Packages  RPM-GPG-KEY-CentOS-Testing-7  images     repodata
+
+可以看到Packages 里面有本地很多RPM 包，那么packages 将作为本地DVD yum 源
+
+建立dvd.repo 源文件
+ vim /etc/yum.repos.d/dvd.repo
+
+[dvd.repo]  ------------------------------------------- 源名字
+name=dvdRepository -------------------------------------源名字
+baseurl=file:///media/iso/  ----------------------------路径 ：注意不用写Packages
+gpgcheck=1 
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+
+保存后执行
+yum clean all
+然后执行
+yum repolist
+
+repo id                                          repo name                                           status
+base/7/x86_64                                    CentOS-7 - Base                                     10072
+dvd.repo                                         dvdRepository                                        4070
+extras/7/x86_64                                  CentOS-7 - Extras                                     526
+updates/7/x86_64                                 CentOS-7 - Updates                                   5879
+repolist: 20547
+
+可以看到 dvd.repo 里面有 4070 个 RPM 包 
+
+即可完成！
