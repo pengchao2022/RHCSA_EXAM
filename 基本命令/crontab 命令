@@ -1,0 +1,42 @@
+crontab 命令用于设置定时任务 相当于windows server 的 task schedule 
+
+crontab -e 可以用于编写任务 例如：
+
+*/1 * * * * /root/tar.sh
+
+第一个* 表示： 一小时中的第几分钟 如： */1 表示每一分钟 1-59
+
+第二个* 表示： 一天当中的第几个小时 如： */1 表示每一小时 1-24
+
+第三个* 表示： 一个月当中的第几天：  如： */1 表示一号 */2 表示2 号 */30 表示30 号
+
+第四个* 表示： 一年当中的第几个月：  如： */1 表示第一个月 */2 表示二月 */3 表示3月
+
+第五个* 标识： 一周当中的星期几：   如： */1 表示星期1
+
+crontab -l
+用于显示计划了的任务：
+[root@centosx ~]# crontab -l
+#*/1 * * * * /root/tar.sh
+
+crontab -r 表示移除计划了的任务
+
+----------------------------------------------
+crontab 命令还可以让普通用户不可以设置定时任务，
+可以通过修改/etc/cron.deny 文件来添加黑名单：
+
+[root@centosx ~]# vim /etc/cron.deny
+[root@centosx pengchao]# cat /etc/cron.deny 
+pengchao
+kate
+lily
+添加这些用户到黑名单 ，然后这些用户就没有权限来设置计划任务了：
+
+[pengchao@centosx ~]$ crontab -e
+You (pengchao) are not allowed to use this program (crontab)
+See crontab(1) for more information
+
+[pengchao@centosx ~]$ crontab -l
+You (pengchao) are not allowed to use this program (crontab)
+See crontab(1) for more information
+
