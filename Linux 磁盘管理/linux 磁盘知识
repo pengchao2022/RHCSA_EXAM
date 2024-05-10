@@ -49,47 +49,82 @@ Sector size (logical/physical): 512 bytes / 512 bytes
 I/O size (minimum/optimal): 512 bytes / 512 bytes
 
 ----------------------------------------------------
-[root@centosx ~]# fdisk -l /dev/sdb
+注意，我们只能格式化 主分区 和 逻辑分区 ， 不可以格式化扩展分区
+
+逻辑分区是在 建好扩展分区后，在扩展分区的基础上建立的逻辑分区。
+
+[root@centosx ~]# fdisk -l
+
+Disk /dev/sda: 21.5 GB, 21474836480 bytes, 41943040 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk label type: dos
+Disk identifier: 0x000f1db4
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1   *        2048      616447      307200   83  Linux
+/dev/sda2          616448     4810751     2097152   82  Linux swap / Solaris
+/dev/sda3         4810752    41943039    18566144   83  Linux
 
 Disk /dev/sdb: 3221 MB, 3221225472 bytes, 6291456 sectors
 Units = sectors of 1 * 512 = 512 bytes
 Sector size (logical/physical): 512 bytes / 512 bytes
 I/O size (minimum/optimal): 512 bytes / 512 bytes
-Disk label type: dos
-Disk identifier: 0x34d28c87
 
-   Device Boot      Start         End      Blocks   Id  System
-/dev/sdb1            2048     4196351     2097152   83  Linux
 [root@centosx ~]# fdisk /dev/sdb
 Welcome to fdisk (util-linux 2.23.2).
 
 Changes will remain in memory only, until you decide to write them.
 Be careful before using the write command.
 
+Device does not contain a recognized partition table
+Building a new DOS disklabel with disk identifier 0x87bd59cb.
 
-Command (m for help): p
-
-Disk /dev/sdb: 3221 MB, 3221225472 bytes, 6291456 sectors
-Units = sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-Disk label type: dos
-Disk identifier: 0x34d28c87
-
-   Device Boot      Start         End      Blocks   Id  System
-/dev/sdb1            2048     4196351     2097152   83  Linux
+Command (m for help): m
+Command action
+   a   toggle a bootable flag
+   b   edit bsd disklabel
+   c   toggle the dos compatibility flag
+   d   delete a partition
+   g   create a new empty GPT partition table
+   G   create an IRIX (SGI) partition table
+   l   list known partition types
+   m   print this menu
+   n   add a new partition
+   o   create a new empty DOS partition table
+   p   print the partition table
+   q   quit without saving changes
+   s   create a new empty Sun disklabel
+   t   change a partition's system id
+   u   change display/entry units
+   v   verify the partition table
+   w   write table to disk and exit
+   x   extra functionality (experts only)
 
 Command (m for help): n
 Partition type:
-   p   primary (1 primary, 0 extended, 3 free)
+   p   primary (0 primary, 0 extended, 4 free)
    e   extended
 Select (default p): e
-Partition number (2-4, default 2): 2
-First sector (4196352-6291455, default 4196352): 
-Using default value 4196352
-Last sector, +sectors or +size{K,M,G} (4196352-6291455, default 6291455): 
+Partition number (1-4, default 1): 1
+First sector (2048-6291455, default 2048): 
+Using default value 2048
+Last sector, +sectors or +size{K,M,G} (2048-6291455, default 6291455): 
 Using default value 6291455
-Partition 2 of type Extended and of size 1023 MiB is set
+Partition 1 of type Extended and of size 3 GiB is set
+
+Command (m for help): n
+Partition type:
+   p   primary (0 primary, 1 extended, 3 free)
+   l   logical (numbered from 5)
+Select (default p): l
+Adding logical partition 5
+First sector (4096-6291455, default 4096): 
+Using default value 4096
+Last sector, +sectors or +size{K,M,G} (4096-6291455, default 6291455): 
+Using default value 6291455
+Partition 5 of type Linux and of size 3 GiB is set
 
 Command (m for help): w
 The partition table has been altered!
@@ -98,39 +133,41 @@ Calling ioctl() to re-read partition table.
 Syncing disks.
 [root@centosx ~]# 
 [root@centosx ~]# 
-[root@centosx ~]# fdisk -l /dev/sdb
+[root@centosx ~]# 
+[root@centosx ~]# 
+[root@centosx ~]# 
+[root@centosx ~]# fdisk -l
+
+Disk /dev/sda: 21.5 GB, 21474836480 bytes, 41943040 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk label type: dos
+Disk identifier: 0x000f1db4
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1   *        2048      616447      307200   83  Linux
+/dev/sda2          616448     4810751     2097152   82  Linux swap / Solaris
+/dev/sda3         4810752    41943039    18566144   83  Linux
 
 Disk /dev/sdb: 3221 MB, 3221225472 bytes, 6291456 sectors
 Units = sectors of 1 * 512 = 512 bytes
 Sector size (logical/physical): 512 bytes / 512 bytes
 I/O size (minimum/optimal): 512 bytes / 512 bytes
 Disk label type: dos
-Disk identifier: 0x34d28c87
+Disk identifier: 0x87bd59cb
 
    Device Boot      Start         End      Blocks   Id  System
-/dev/sdb1            2048     4196351     2097152   83  Linux
-/dev/sdb2         4196352     6291455     1047552    5  Extended
-[root@centosx ~]# cat /etc/fstab 
-
-#
-# /etc/fstab
-# Created by anaconda on Sun May  5 20:08:17 2024
-#
-# Accessible filesystems, by reference, are maintained under '/dev/disk'
-# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
-#
-UUID=6f35a55a-1500-49cb-90b3-237dffdd8240 /                       xfs     defaults        0 0
-UUID=4dcfc15a-67a6-454b-b525-7200eee599cb /boot                   xfs     defaults        0 0
-UUID=84f79e34-04d1-40fe-8cfc-ab780c4343c1 swap                    swap    defaults        0 0
-
+/dev/sdb1            2048     6291455     3144704    5  Extended
+/dev/sdb5            4096     6291455     3143680   83  Linux
 [root@centosx ~]# mkfs.
 mkfs.btrfs   mkfs.ext2    mkfs.ext4    mkfs.minix   mkfs.vfat    
 mkfs.cramfs  mkfs.ext3    mkfs.fat     mkfs.msdos   mkfs.xfs     
-[root@centosx ~]# mkfs.xfs /dev/sdb1
-meta-data=/dev/sdb1              isize=512    agcount=4, agsize=131072 blks
+[root@centosx ~]# mkfs.xfs /dev/sdb5
+meta-data=/dev/sdb5              isize=512    agcount=4, agsize=196480 blks
          =                       sectsz=512   attr=2, projid32bit=1
          =                       crc=1        finobt=0, sparse=0
-data     =                       bsize=4096   blocks=524288, imaxpct=25
+data     =                       bsize=4096   blocks=785920, imaxpct=25
          =                       sunit=0      swidth=0 blks
 naming   =version 2              bsize=4096   ascii-ci=0 ftype=1
 log      =internal log           bsize=4096   blocks=2560, version=2
@@ -138,15 +175,12 @@ log      =internal log           bsize=4096   blocks=2560, version=2
 realtime =none                   extsz=4096   blocks=0, rtextents=0
 [root@centosx ~]# 
 [root@centosx ~]# 
-[root@centosx ~]# mkdir /disk/file1 /dev/sdb1
-mkdir: cannot create directory '/disk/file1': No such file or directory
-mkdir: cannot create directory '/dev/sdb1': File exists
-[root@centosx ~]# mkdir /disk/file1
-mkdir: cannot create directory '/disk/file1': No such file or directory
-[root@centosx ~]# mkdir -p /disk/space1
 [root@centosx ~]# 
 [root@centosx ~]# 
-[root@centosx ~]# mount /dev/sdb1 /disk/space1/
+[root@centosx ~]# 
+[root@centosx ~]# 
+[root@centosx ~]# mount /dev/sdb5 /allen/disk/
+[root@centosx ~]# 
 [root@centosx ~]# 
 [root@centosx ~]# 
 [root@centosx ~]# 
@@ -156,140 +190,12 @@ devtmpfs       devtmpfs  471M     0  471M   0% /dev
 tmpfs          tmpfs     487M     0  487M   0% /dev/shm
 tmpfs          tmpfs     487M  8.4M  478M   2% /run
 tmpfs          tmpfs     487M     0  487M   0% /sys/fs/cgroup
-/dev/sda3      xfs        18G  7.3G   11G  41% /
+/dev/sda3      xfs        18G  7.3G   11G  42% /
 /dev/sda1      xfs       297M  192M  105M  65% /boot
-tmpfs          tmpfs      98M   12K   98M   1% /run/user/42
+tmpfs          tmpfs      98M  8.0K   98M   1% /run/user/42
 tmpfs          tmpfs      98M     0   98M   0% /run/user/0
-/dev/sdb1      xfs       2.0G   33M  2.0G   2% /disk/space1
-[root@centosx ~]# mkfs.xfs /dev/sdb2
-mkfs.xfs: /dev/sdb2 appears to contain a partition table (dos).
-mkfs.xfs: Use the -f option to force overwrite.
+/dev/sdb5      xfs       3.0G   33M  3.0G   2% /allen/disk
 [root@centosx ~]# 
-[root@centosx ~]# 
-[root@centosx ~]# mkfs.xfs -f /dev/sdb2
-size 0 of data subvolume is too small, minimum 100 blocks
-Usage: mkfs.xfs
-/* blocksize */		[-b log=n|size=num]
-/* metadata */		[-m crc=0|1,finobt=0|1,uuid=xxx]
-/* data subvol */	[-d agcount=n,agsize=n,file,name=xxx,size=num,
-			    (sunit=value,swidth=value|su=num,sw=num|noalign),
-			    sectlog=n|sectsize=num
-/* force overwrite */	[-f]
-/* inode size */	[-i log=n|perblock=n|size=num,maxpct=n,attr=0|1|2,
-			    projid32bit=0|1]
-/* no discard */	[-K]
-/* log subvol */	[-l agnum=n,internal,size=num,logdev=xxx,version=n
-			    sunit=value|su=num,sectlog=n|sectsize=num,
-			    lazy-count=0|1]
-/* label */		[-L label (maximum 12 characters)]
-/* naming */		[-n log=n|size=num,version=2|ci,ftype=0|1]
-/* no-op info only */	[-N]
-/* prototype file */	[-p fname]
-/* quiet */		[-q]
-/* realtime subvol */	[-r extsize=num,size=num,rtdev=xxx]
-/* sectorsize */	[-s log=n|size=num]
-/* version */		[-V]
-			devicename
-<devicename> is required unless -d name=xxx is given.
-<num> is xxx (bytes), xxxs (sectors), xxxb (fs blocks), xxxk (xxx KiB),
-      xxxm (xxx MiB), xxxg (xxx GiB), xxxt (xxx TiB) or xxxp (xxx PiB).
-<value> is xxx (512 byte blocks).
-[root@centosx ~]# mkfs.ext4 /dev/sdb2
-mke2fs 1.42.9 (28-Dec-2013)
-mkfs.ext4: inode_size (128) * inodes_count (0) too big for a
-	filesystem with 0 blocks, specify higher inode_ratio (-i)
-	or lower inode count (-N).
-
-[root@centosx ~]# mkfs.ext4 /dev/sbd2
-mke2fs 1.42.9 (28-Dec-2013)
-Could not stat /dev/sbd2 --- No such file or directory
-
-The device apparently does not exist; did you specify it correctly?
-[root@centosx ~]# mkfs.ext4 /dev/sdb2
-mke2fs 1.42.9 (28-Dec-2013)
-mkfs.ext4: inode_size (128) * inodes_count (0) too big for a
-	filesystem with 0 blocks, specify higher inode_ratio (-i)
-	or lower inode count (-N).
-
-[root@centosx ~]# fdisk -l
-
-Disk /dev/sda: 21.5 GB, 21474836480 bytes, 41943040 sectors
-Units = sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-Disk label type: dos
-Disk identifier: 0x000f1db4
-
-   Device Boot      Start         End      Blocks   Id  System
-/dev/sda1   *        2048      616447      307200   83  Linux
-/dev/sda2          616448     4810751     2097152   82  Linux swap / Solaris
-/dev/sda3         4810752    41943039    18566144   83  Linux
-
-Disk /dev/sdb: 3221 MB, 3221225472 bytes, 6291456 sectors
-Units = sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-Disk label type: dos
-Disk identifier: 0x34d28c87
-
-   Device Boot      Start         End      Blocks   Id  System
-/dev/sdb1            2048     4196351     2097152   83  Linux
-/dev/sdb2         4196352     6291455     1047552    5  Extended
-[root@centosx ~]# mkfs.xfs /dev/sdb5
-/dev/sdb5: No such file or directory
-Usage: mkfs.xfs
-/* blocksize */		[-b log=n|size=num]
-/* metadata */		[-m crc=0|1,finobt=0|1,uuid=xxx]
-/* data subvol */	[-d agcount=n,agsize=n,file,name=xxx,size=num,
-			    (sunit=value,swidth=value|su=num,sw=num|noalign),
-			    sectlog=n|sectsize=num
-/* force overwrite */	[-f]
-/* inode size */	[-i log=n|perblock=n|size=num,maxpct=n,attr=0|1|2,
-			    projid32bit=0|1]
-/* no discard */	[-K]
-/* log subvol */	[-l agnum=n,internal,size=num,logdev=xxx,version=n
-			    sunit=value|su=num,sectlog=n|sectsize=num,
-			    lazy-count=0|1]
-/* label */		[-L label (maximum 12 characters)]
-/* naming */		[-n log=n|size=num,version=2|ci,ftype=0|1]
-/* no-op info only */	[-N]
-/* prototype file */	[-p fname]
-/* quiet */		[-q]
-/* realtime subvol */	[-r extsize=num,size=num,rtdev=xxx]
-/* sectorsize */	[-s log=n|size=num]
-/* version */		[-V]
-			devicename
-<devicename> is required unless -d name=xxx is given.
-<num> is xxx (bytes), xxxs (sectors), xxxb (fs blocks), xxxk (xxx KiB),
-      xxxm (xxx MiB), xxxg (xxx GiB), xxxt (xxx TiB) or xxxp (xxx PiB).
-<value> is xxx (512 byte blocks).
-[root@centosx ~]# fdisk -l
-
-Disk /dev/sda: 21.5 GB, 21474836480 bytes, 41943040 sectors
-Units = sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-Disk label type: dos
-Disk identifier: 0x000f1db4
-
-   Device Boot      Start         End      Blocks   Id  System
-/dev/sda1   *        2048      616447      307200   83  Linux
-/dev/sda2          616448     4810751     2097152   82  Linux swap / Solaris
-/dev/sda3         4810752    41943039    18566144   83  Linux
-
-Disk /dev/sdb: 3221 MB, 3221225472 bytes, 6291456 sectors
-Units = sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-Disk label type: dos
-Disk identifier: 0x34d28c87
-
-   Device Boot      Start         End      Blocks   Id  System
-/dev/sdb1            2048     4196351     2097152   83  Linux
-/dev/sdb2         4196352     6291455     1047552    5  Extended
-
-
-
 
 
 
