@@ -1,1 +1,69 @@
+为什么要使用ACL 呢 ？ 前面不是有 chmod 命令 可以对 owner, group, others 做文件的访问授权
+
+但是，chmod 命令不能给具体到某一个人添加权限，比如，others 里面有 user1 和 user2 ,但是 User1 和 User2 的权限不一样，
+
+chmod 命令只能笼统的给 user1 user2 分配其所属组 others 的权限。
+
+为了给 user1 , user2 分配个性化自定义的全新，所以引入了 ACL 访问控制权限。
+
+ACL 的目的就是做到权限的颗粒化。
+--------------------------------------------------------------------------------------
+首先 我们从最基础的说起：
+
+要进入一个文件夹或目录， 用户必须要有 x 权限，及执行权限
+
+要列出一个文件夹或目录里面的内容， 用户必须要有 r 权限，及读权限
+
+要在一个文件夹里面新建文件或目录， 用户必须要有 w 权限，及写的权限 
+
+--------------------------------------------------------------------------------------
+举例说明， 现在创建一个文件夹acl2024 和一个文件 myfile2024 , 其中eric 对myfile2024 可以修改 也可以读取
+
+但是 John 对myfile2024 只能读，别的不可以操作：
+
+[root@centosx /]# setfacl -Rm user:eric:rwx /acl2024/
+[root@centosx /]# 
+[root@centosx /]# 
+[root@centosx /]# 
+[root@centosx /]# getfacl acl2024/
+# file: acl2024/
+# owner: root
+# group: root
+user::rwx
+user:eric:rwx
+group::r-x
+mask::rwx
+other::r-x
+
+[root@centosx /]# setfacl -Rm user:john:r /acl2024/
+[root@centosx /]# 
+[root@centosx /]# 
+[root@centosx /]# getfacl acl2024/
+# file: acl2024/
+# owner: root
+# group: root
+user::rwx
+user:eric:rwx
+user:john:r--
+group::r-x
+mask::rwx
+other::r-x
+
+对于 john 用户还要再加一条命令，要不然他进不去 /acl2024 文件夹
+
+[root@centosx /]# setfacl -m user:john:rx /acl2024/
+
+root@centosx /]# getfacl /acl2024/
+getfacl: Removing leading '/' from absolute path names
+# file: acl2024/
+# owner: root
+# group: root
+user::rwx
+user:eric:rwx
+user:john:r-x
+group::r-x
+mask::rwx
+other::r-x
+
+
 
