@@ -64,6 +64,23 @@ user:john:r-x
 group::r-x
 mask::rwx
 other::r-x
+------------------------------------------------------------------------
+[root@centosx /]# getfacl /acl2024/
+getfacl: Removing leading '/' from absolute path names
+# file: acl2024/    ----------- 文件名称
+# owner: root       ----------- 文件拥有者
+# group: root       ------------ 文件拥有组
+user::rwx           ------------原始拥有人权限
+user:eric:rwx      ------------- 普通用户eric 的权限
+user:john:r-x      ------------- 普通用户jogn 的权限
+group::r-x         -------------- 原始组权限
+mask::rwx          --------------- 掩码权限
+other::r-x         --------------- 其他权限
+
+原始组的权限 和 指定组的权限 指定用户权限 受到 msk 影响
+
+只能小于或等于 mask 权限
+
 
 
 
