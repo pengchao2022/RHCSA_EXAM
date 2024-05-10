@@ -197,5 +197,82 @@ tmpfs          tmpfs      98M     0   98M   0% /run/user/0
 /dev/sdb5      xfs       3.0G   33M  3.0G   2% /allen/disk
 [root@centosx ~]# 
 
+-------------------------------------------------------------
+使用 gdisk 命令来划分 GPT 分区：
+
+[root@centosx ~]# gdisk /dev/sdb
+GPT fdisk (gdisk) version 0.8.10
+
+Partition table scan:
+  MBR: not present
+  BSD: not present
+  APM: not present
+  GPT: not present
+
+Creating new GPT entries.
+
+Command (? for help): ?
+b	back up GPT data to a file
+c	change a partition's name
+d	delete a partition
+i	show detailed information on a partition
+l	list known partition types
+n	add a new partition
+o	create a new empty GUID partition table (GPT)
+p	print the partition table
+q	quit without saving changes
+r	recovery and transformation options (experts only)
+s	sort partitions
+t	change a partition's type code
+v	verify disk
+w	write table to disk and exit
+x	extra functionality (experts only)
+?	print this menu
+
+Command (? for help): n
+Partition number (1-128, default 1): 1
+First sector (34-8388574, default = 2048) or {+-}size{KMGTP}: 
+Last sector (2048-8388574, default = 8388574) or {+-}size{KMGTP}: 
+Current type is 'Linux filesystem'
+Hex code or GUID (L to show codes, Enter = 8300): 
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help): w
+
+Final checks complete. About to write GPT data. THIS WILL OVERWRITE EXISTING
+PARTITIONS!!
+
+Do you want to proceed? (Y/N): y
+OK; writing new GUID partition table (GPT) to /dev/sdb.
+The operation has completed successfully.
+[root@centosx ~]# 
+[root@centosx ~]# 
+[root@centosx ~]# 
+[root@centosx ~]# fdisk -l
+
+Disk /dev/sda: 21.5 GB, 21474836480 bytes, 41943040 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk label type: dos
+Disk identifier: 0x000f1db4
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1   *        2048      616447      307200   83  Linux
+/dev/sda2          616448     4810751     2097152   82  Linux swap / Solaris
+/dev/sda3         4810752    41943039    18566144   83  Linux
+WARNING: fdisk GPT support is currently new, and therefore in an experimental phase. Use at your own discretion.
+
+Disk /dev/sdb: 4294 MB, 4294967296 bytes, 8388608 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk label type: gpt
+Disk identifier: 52E12CD2-E181-44C1-BB48-2673551EE91C
+
+
+#         Start          End    Size  Type            Name
+ 1         2048      8388574      4G  Linux filesyste Linux filesystem
+[root@centosx ~]# 
 
 
