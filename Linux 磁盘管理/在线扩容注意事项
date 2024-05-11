@@ -6,3 +6,8 @@ resize2fs 命令只能用于 更改 ext4 文件格式的文件大小，不能用
 要修改xfs 格式的文件大小，需要使用 [root@centosx ~]# xfs_growfs /mnt/data
 
 [root@centosx ~]# xfs_growfs /mnt/data
+
+注意 ：xfs_growfs  ---- 命令 后面只能加 挂载点 不能加设备号
+
+而  resize2fs 命令 后面只能加 设备号，不能加挂载点
+
