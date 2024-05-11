@@ -1,0 +1,35 @@
+我们之前创建的 mylv2024 逻辑卷只有152 MB ，现在需要扩大到 240M , 做一下 在线扩容：
+
+[root@centosx ~]# lvs
+  LV       VG          Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  allenlv  allenvg2024 -wi-ao----  80.00m                                                    
+  katelv   kate32vg    -wi-ao---- 256.00m                                                    
+  mylv2024 myvg2024    -wi-ao---- 152.00m  --------------- 可以看到 mylv2024 使用的是 myvg2024 VG组                                                   
+[root@centosx ~]# vgs
+  VG          #PV #LV #SN Attr   VSize   VFree 
+  allenvg2024   2   1   0 wz--n-  92.00m 12.00m
+  kate32vg      3   1   0 wz--n- 288.00m 32.00m
+  myvg2024      2   1   0 wz--n- 192.00m 40.00m  --------------   myvg2024 的剩余空间只有 40M ,不够用，所有需要 增加 VG 的容量
+
+1， 增加VG 的容量：
+[root@centosx ~]# vgextend myvg2024 /dev/sdb3
+  Volume group "myvg2024" successfully extended   /dev/sdb3 有 100M 容量
+2，检查VG 现在的容量：
+[root@centosx ~]# vgs
+  VG          #PV #LV #SN Attr   VSize   VFree  
+  allenvg2024   2   1   0 wz--n-  92.00m  12.00m
+  kate32vg      3   1   0 wz--n- 288.00m  32.00m
+  myvg2024      3   1   0 wz--n- 288.00m 136.00m  --------------- 可以看到目前myvg2024 可用容量为：136M
+
+3. 增加LV 的容量：
+[root@centosx ~]# lvextend /dev/myvg2024/mylv2024 -L 240M  ---------  没带 + 号 表示增加到 240M 
+  Size of logical volume myvg2024/mylv2024 changed from 152.00 MiB (38 extents) to 240.00 MiB (60 extents).
+  Logical volume myvg2024/mylv2024 successfully resized.
+
+4， 检查现在 LV 的容量：
+[root@centosx ~]# lvs
+  LV       VG          Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  allenlv  allenvg2024 -wi-ao----  80.00m                                                    
+  katelv   kate32vg    -wi-ao---- 256.00m                                                    
+  mylv2024 myvg2024    -wi-ao---- 240.00m      ---------------  可以看到现在 mylv2024 逻辑卷的容量已经变为了 240M
+
