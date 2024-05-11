@@ -42,7 +42,13 @@ arch  crypto  drivers  fs  kernel  lib  mm  net  sound  virt
 
 ————————————————————————————————————————————————————————————————————————————————————————————————————————————
 linux centos 7 中 第一个进程是 ： systemd
+编辑 linux 开机显示界面可以编辑 grub 文件：
 
+[root@centosx grub2]# pwd
+/boot/grub2
+root@centosx grub2]# vim grub.cfg 
+### BEGIN /etc/grub.d/10_linux ###
+menuentry 'CentOS Hello pengchao , this is your linux server7 (Core)' --class centos --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option 'gnulinux-3.10.0-1160.el7.x86_64-advanced-6f35a55a-1500-49cb-90b3-237dffdd8240' {
 
 
 
