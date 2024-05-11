@@ -33,3 +33,27 @@
   katelv   kate32vg    -wi-ao---- 256.00m                                                    
   mylv2024 myvg2024    -wi-ao---- 240.00m      ---------------  可以看到现在 mylv2024 逻辑卷的容量已经变为了 240M
 
+5, 更改文件系统的大小，是的挂载点的容量也为 240MB
+
+[root@centosx ~]# resize2fs /dev/myvg2024/mylv2024 
+resize2fs 1.42.9 (28-Dec-2013)
+Filesystem at /dev/myvg2024/mylv2024 is mounted on /LV/lv1; on-line resizing required
+old_desc_blocks = 2, new_desc_blocks = 3
+The filesystem on /dev/myvg2024/mylv2024 is now 286720 blocks long.
+
+[root@centosx ~]# 
+[root@centosx ~]# mount -a
+[root@centosx ~]# df -TH
+Filesystem                      Type      Size  Used Avail Use% Mounted on
+devtmpfs                        devtmpfs  494M     0  494M   0% /dev
+tmpfs                           tmpfs     510M     0  510M   0% /dev/shm
+tmpfs                           tmpfs     510M  8.8M  501M   2% /run
+tmpfs                           tmpfs     510M     0  510M   0% /sys/fs/cgroup
+/dev/sda3                       xfs        20G  7.8G   12G  42% /
+/dev/mapper/kate32vg-katelv     xfs       265M   14M  252M   6% /LV/kate
+/dev/mapper/allenvg2024-allenlv xfs        81M  4.5M   76M   6% /LV/lv2
+/dev/sda1                       xfs       312M  202M  110M  65% /boot
+/dev/mapper/myvg2024-mylv2024   ext4      281M  2.2M  262M   1% /LV/lv1
+tmpfs                           tmpfs     102M   13k  102M   1% /run/user/42
+tmpfs                           tmpfs     102M     0  102M   0% /run/user/0
+
