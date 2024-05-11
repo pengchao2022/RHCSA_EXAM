@@ -1,0 +1,124 @@
+NFS  network-attached file system 网络文件系统
+
+NFS 只能用于 linunx 服务器之间的共享，不能用于Windows , Windows 只能使用 SMB 
+
+NFSv4  NFS 要借助 RPC 服务来进行， RPC 是远程过程调用服务 相当于监听的中转点
+
+NFS 服务器端搭建：
+1， 安装：
+[root@centosx ~]# yum install nfs-utils
+
+2，启动服务：
+[root@centosx ~]# systemctl start nfs.service 
+
+4,查看状态：
+[root@centosx ~]# systemctl status nfs.service 
+● nfs-server.service - NFS server and services
+   Loaded: loaded (/usr/lib/systemd/system/nfs-server.service; enabled; vendor preset: disabled)
+   Active: active (exited) since Sat 2024-05-11 21:50:20 CST; 10s ago
+  Process: 4286 ExecStartPost=/bin/sh -c if systemctl -q is-active gssproxy; then systemctl reload gssproxy ; fi (code=exited, status=0/SUCCESS)
+
+5，开机自动启动nfs 服务：
+[root@centosx ~]# systemctl enable nfs.service
+
+6, 关闭防火墙：
+[root@centosx ~]# systemctl stop firewalld
+
+7，创建共享目录：
+[root@centosx ~]# mkdir -p /nfs/katenfs
+
+8, 在 /etc/exports 文件中做共享，需要写配置文件
+[root@centosx ~]# vim /etc/exports
+[root@centosx ~]# cat /etc/exports
+/nfs/katenfs       *(rw)
+
+9, 重启 nfs 服务：
+[root@centosx ~]# systemctl restart nfs-server
+
+10，在客户端机器上创建一个文件夹，名字叫：share2024 举例
+[root@centosy ~]# mkdir /share2024
+
+11, 在客户端上挂载 NFS 服务器共享的文件夹：
+[root@centosy ~]# mount 192.168.19.150:/nfs/katenfs /share2024/
+[root@centosy ~]# 
+
+12， 进入 share2024 目录看看能不能看到 katenfs 里的文件：
+[root@centosy share2024]# ls
+helloworld.c
+可以看到 说明共享成功
+
+13， katefs文件夹里面依然不能创建文件，如果要创建文件 ，需要在nfs server 上授权： 
+[root@centosx ~]# chmod o+w /nfs/katenfs/
+[root@centosx ~]# ls -ld /nfs/katenfs/
+drwxr-xrwx 2 root root 26 May 11 22:01 /nfs/katenfs/
+[root@centosx ~]# 
+
+14 , 现在测试 已经有了写的权限：
+[root@centosy share2024]# ls
+client.c  helloworld.c
+
+以上都是临时挂载
+---------------------------------------------
+
+持久挂载介绍：
+
+永久挂载 只需要在 /etc/fstab 里面写入：
+
+192.168.19.150:/nfs/katenfs       /nfsshare     nfs     defaults        0 0
+
+
+----------------------------------------------
+下面主要讲一下 自动挂载 nfs 模式：
+
+1， 在客户端主机上安装 autofs 软件包
+yum install autofs -y
+
+2，启动 autofs 服务
+systemctl start autofs
+
+3, 开机启动autofs 服务
+ systemctl enable autofs
+
+4, 在 根目录下创建一个包含二级目录的文件夹
+mkdir -p /RHCE/RHCESHARE
+
+5，修改/etc/auto.master 文件
+[root@centosy RHCESHARE]# cat /etc/auto.master 
+#
+# Sample auto.master file
+# This is a 'master' automounter map and it has the following format:
+# mount-point [map-type[,format]:]map [options]
+# For details of the format look at auto.master(5).
+#
+/misc	/etc/auto.misc
+/RHCE   /etc/auto.misc   ------------------ 注意这里写客户端一级目录 
+#
+
+6，修改/etc/auto.misc  文件
+[root@centosy RHCESHARE]# cat /etc/auto.misc 
+
+
+RHCESHARE    192.168.19.150:/nfs/katenfs         -------------- 注意这里写客户端的二级目录，并写NFS 服务器需要共享的文件夹
+#
+# This is an automounter map and it has the following format
+# key [ -mount-options-separated-by-comma ] location
+# Details may be found in the autofs(5) manpage
+
+7， 重启 autofs 服务
+systemctl restart autofs
+
+8，测试：
+[root@centosy ~]# cd /RHCE
+[root@centosy RHCE]# cd RHCESHARE
+[root@centosy RHCESHARE]# ls
+client.c  helloworld.c
+
+这儿已经可以看到了 NFS 服务器上的文件，任务完成
+-------
+
+
+
+
+
+
+
