@@ -94,7 +94,7 @@ UUID=1e007d29-a055-4c8a-bc95-da4feeffba50 /                       xfs     defaul
 UUID=ab41c06b-dd04-45bc-b17d-11ab1775c898 /boot                   xfs     defaults        0 0
 UUID=c3120815-dcb8-4ba6-90fe-da7bd01cd2c9 swap                    swap    defaults        0 0
 UUID=2020-11-04-11-36-43-00              /media/iso               iso9660 defaults        0 0
-UUID=df7a89e1-19d2-4b4f-8d42-7c79d7516f5f /mnt/vdo1               xfs     defaults        0 0
+ /dev/mapper/vdo1/mnt/vdo1               xfs        defaults,x-systemd.requires=vdo.service        0 0   ---逗号中间不能有空格
 
 
 
