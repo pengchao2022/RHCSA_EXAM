@@ -1,0 +1,8 @@
+注意：
+[root@centosx ~]# resize2fs /dev/myvg2024/mylv2024 
+
+resize2fs 命令只能用于 更改 ext4 文件格式的文件大小，不能用于修改 xfs 文件格式的文件大小
+
+要修改xfs 格式的文件大小，需要使用 [root@centosx ~]# xfs_growfs /mnt/data
+
+[root@centosx ~]# xfs_growfs /mnt/data
