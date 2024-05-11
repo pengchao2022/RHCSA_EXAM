@@ -115,6 +115,21 @@ client.c  helloworld.c
 
 这儿已经可以看到了 NFS 服务器上的文件，任务完成
 -------
+[root@centosy RHCESHARE]# df -TH  ----------------------------------------注意，对于自动挂在的目录，用的时候会挂载，不用的时候会消失
+                                                                                消失后再次进入共享目录，即可挂载
+Filesystem                  Type      Size  Used Avail Use% Mounted on
+devtmpfs                    devtmpfs  494M     0  494M   0% /dev
+tmpfs                       tmpfs     510M     0  510M   0% /dev/shm
+tmpfs                       tmpfs     510M  8.8M  501M   2% /run
+tmpfs                       tmpfs     510M     0  510M   0% /sys/fs/cgroup
+/dev/sda3                   xfs        20G  6.4G   13G  34% /
+/dev/mapper/rhcsavg-vo      ext4      293M  2.2M  272M   1% /vo
+/dev/mapper/lilyvg-lilylv   ext4      780M  1.2M  727M   1% /lilylv/lv1
+/dev/sda1                   xfs       312M  200M  112M  65% /boot
+tmpfs                       tmpfs     102M   13k  102M   1% /run/user/42
+tmpfs                       tmpfs     102M     0  102M   0% /run/user/0
+192.168.19.150:/nfs/katenfs nfs4       20G  7.8G   12G  42% /RHCE/RHCESHARE
+[root@centosy RHCESHARE]# 
 
 
 
