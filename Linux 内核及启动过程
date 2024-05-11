@@ -1,0 +1,53 @@
+启动过程 ：
+
+linux 加电后，系统固件开始加电自检，这是任何操作系统都会做的第一步
+接下来固件会查找启动设备，通常为磁盘，也可以在BIOS 中设置启动顺序，
+固件会从磁盘中读取 GRUB 文件。
+GRUB 将会从 /boot/grub2/grub.cfg 文件中加载配置菜单 同时会加载内核
+
+加载完内核后 执行 init 进程初始化，现在是 systemd 命令服务初始化 
+
+CENTOS7 使用的是 grub2 启动引导器
+
+--------------------------------------
+查看内核版本及 内核位置：
+[root@centosx boot]# uname -r
+3.10.0-1160.118.1.el7.x86_64
+
+[root@centosx boot]# ls
+System.map-3.10.0-1160.118.1.el7.x86_64  initramfs-0-rescue-0038826533b24977a5523e6974450b1a.img
+System.map-3.10.0-1160.el7.x86_64        initramfs-3.10.0-1160.118.1.el7.x86_64.img
+config-3.10.0-1160.118.1.el7.x86_64      initramfs-3.10.0-1160.el7.x86_64.img
+config-3.10.0-1160.el7.x86_64            symvers-3.10.0-1160.118.1.el7.x86_64.gz
+efi                                      symvers-3.10.0-1160.el7.x86_64.gz
+extlinux                                 vmlinuz-0-rescue-0038826533b24977a5523e6974450b1a
+grub                                     vmlinuz-3.10.0-1160.118.1.el7.x86_64 ------------------------------ 这个就是核心 
+grub2                                    vmlinuz-3.10.0-1160.el7.x86_64
+
+linux 内核原始代码位置：
+
+[root@centosx kernels]# ls
+3.10.0-1160.118.1.el7.x86_64  3.10.0-1160.el7.x86_64
+[root@centosx kernels]# pwd
+/usr/src/kernels
+
+内核本身并不大，需要用到的程序功能 都以模块化的形式加载 
+模块的位置：
+root@centosx kernel]# ls
+arch  crypto  drivers  fs  kernel  lib  mm  net  sound  virt
+[root@centosx kernel]# pwd
+/lib/modules/3.10.0-1160.118.1.el7.x86_64/kernel
+
+里面这些子目录 ： arch  crypto  drivers  fs  kernel  lib  mm  net  sound  virt   代表内核模块被分门别类的 放在里面
+
+————————————————————————————————————————————————————————————————————————————————————————————————————————————
+linux centos 7 中 第一个进程是 ： systemd
+
+
+
+
+
+
+
+
+
