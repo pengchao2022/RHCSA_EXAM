@@ -1,0 +1,103 @@
+VDO 是： Virtual Data Optimizer 虚拟磁盘数据性能优化
+
+需要安装的包有：
+
+[root@centosx ~]# yum install vdo kmod-kvdo
+
+1, 创建 VDO 并注册
+
+
+[root@centos7 ~]# vdo create --name=vdo1 --device=/dev/sdb --vdoLogicalSize=20G
+Creating VDO vdo1
+Starting VDO vdo1
+Starting compression on VDO vdo1
+VDO instance 0 volume is ready at /dev/mapper/vdo1
+[root@centos7 ~]# 
+
+注册 ：
+[root@control ~]# udevadm settle 
+
+2，查看vdo1 的属性：
+[root@centos7 ~]# vdo status -n vdo1
+VDO status:
+  Date: '2024-05-11 08:25:33-04:00'
+  Node: centos7
+Kernel module:
+  Loaded: true
+  Name: kvdo
+  Version information:
+    kvdo version: 6.1.3.23
+Configuration:
+  File: /etc/vdoconf.yml
+  Last modified: '2024-05-11 08:23:07'
+VDOs:
+  vdo1:
+    Acknowledgement threads: 1
+    Activate: enabled
+    Bio rotation interval: 64
+    Bio submission threads: 4
+    Block map cache size: 128M
+    Block map period: 16380
+    Block size: 4096
+    CPU-work threads: 2
+    Compression: enabled
+    Configured write policy: auto
+    Deduplication: enabled
+    Device mapper status: 0 41943040 vdo /dev/sdb normal - online online 789264 4980736
+    Emulate 512 byte: disabled
+    Hash zone threads: 1
+    Index checkpoint frequency: 0
+    Index memory setting: 0.25
+    Index parallel factor: 0
+    Index sparse: disabled
+    Index status: online
+    Logical size: 20G
+    Logical threads: 1
+    Physical size: 19G
+
+3，列出所有 vdo :
+[root@centos7 ~]# vdo list
+vdo1
+
+4，格式化 vdo1 
+[root@control ~]# mkfs.xfs -K /dev/mapper/vdo1  ---------------------------------- 注意这里的参数 K 是大写的 K
+meta-data=/dev/mapper/vdo1       isize=512    agcount=4, agsize=1310720 blks
+         =                       sectsz=4096  attr=2, projid32bit=1
+         =                       crc=1        finobt=0, sparse=0
+data     =                       bsize=4096   blocks=5242880, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0 ftype=1
+log      =internal log           bsize=4096   blocks=2560, version=2
+         =                       sectsz=4096  sunit=1 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+[root@control ~]# 
+
+
+5， 创建挂载点 /mnt/vdo1
+[root@control ~]# mkdir /mnt/vdo1
+
+6, 挂载：
+[root@control ~]# mount /dev/mapper/vdo1 /mnt/vdo1/
+
+7, 写入分区表：
+[root@control ~]# vim /etc/fstab 
+[root@control ~]# cat /etc/fstab 
+
+#
+# /etc/fstab
+# Created by anaconda on Tue Apr 30 18:03:05 2024
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk'
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+#
+UUID=1e007d29-a055-4c8a-bc95-da4feeffba50 /                       xfs     defaults        0 0
+UUID=ab41c06b-dd04-45bc-b17d-11ab1775c898 /boot                   xfs     defaults        0 0
+UUID=c3120815-dcb8-4ba6-90fe-da7bd01cd2c9 swap                    swap    defaults        0 0
+UUID=2020-11-04-11-36-43-00              /media/iso               iso9660 defaults        0 0
+UUID=df7a89e1-19d2-4b4f-8d42-7c79d7516f5f /mnt/vdo1               xfs     defaults        0 0
+
+
+
+
+
+
