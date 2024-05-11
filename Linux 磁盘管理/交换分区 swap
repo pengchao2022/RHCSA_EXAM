@@ -27,3 +27,11 @@ major minor  #blocks  name
    8       21    3143680 sdb5
 
 -------------------------------------------
+查看 swap 分区：
+
+[root@centosx ~]# free -m
+              total        used        free      shared  buff/cache   available
+Mem:            972         591          60          10         320         228
+Swap:          5117           0        5117
+
+-------------------------------------------
