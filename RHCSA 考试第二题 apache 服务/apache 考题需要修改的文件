@@ -61,7 +61,13 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/httpd.service t
 [root@localhost ~]# 
 
 
-结束
+8，浏览测试下，使用82 号端口：
+[root@localhost ~]# curl 127.0.0.1:82
+
+Hello world!
+[root@localhost ~]# 
+
+正确
 
 
 
