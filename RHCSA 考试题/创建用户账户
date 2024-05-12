@@ -1,0 +1,34 @@
+例题： 根据下面要求 创建用户账户及组账户：
+1）名为admins 的组
+2）用户harry ,其附属组为 admins
+3) 用户 natasha ，其附属组 还属于 admins
+4) 用户 alice , 没有可交互的 登录shell, 且不属于admins 组
+5）harry,natasha, alice 的密码都是redhat
+
+解答：
+首先创建组 admins
+[root@localhost ~]# groupadd admins
+[root@localhost ~]# cat /etc/group | grep admins
+admins:x:1001:                                  ----------------------- 可以看到 组已经成功创建
+
+建立 用户harry ,并指定其附属组为 admins:
+[root@localhost ~]# useradd -G admins harry
+
+建立用户 natasha ,其附属组 还是 admins:
+[root@localhost ~]# useradd -G admins natasha
+
+建立用户 alice ,没有交互shell ,且不属于 admins 组：
+[root@localhost ~]# useradd -s /sbin/nologin alice
+
+给三个用户创建redhat 的密码：
+[root@localhost ~]# echo "redhat" | passwd --stdin harry
+Changing password for user harry.
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# echo "redhat" | passwd --stdin natasha
+Changing password for user natasha.
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# echo "redhat" | passwd --stdin alice
+Changing password for user alice.
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# 
+
