@@ -1,0 +1,13 @@
+例题：创建用户 tammy ,其用户ID 为2024，此用户的密码是 redhat
+
+1, 创建用户指定ID：
+  [root@mysql573 etc]# useradd -u 2024 tammy
+
+2， 验证用户的ID
+  [root@mysql573 etc]# id tammy
+uid=2024(tammy) gid=2024(tammy) groups=2024(tammy)
+
+3, 给用户写入密码：
+  [root@mysql573 etc]# echo redhat | passwd --stdin tammy
+Changing password for user tammy.
+passwd: all authentication tokens updated successfully.
