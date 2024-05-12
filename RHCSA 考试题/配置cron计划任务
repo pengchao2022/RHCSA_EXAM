@@ -1,0 +1,15 @@
+配置计划任务，以用户 harry 的身份 每5分钟执行一次 echo hello
+
+[root@localhost ~]# crontab -u harry -e  ------  进入 Harry 的编辑模式
+
+查看用户 harry 的计划任务：
+
+[root@localhost ~]# crontab -u harry -l
+*/5 * * * *      echo "Hello"
+
+
+删除用户 harry 的计划任务：
+
+[root@localhost ~]# crontab -u harry -r
+[root@localhost ~]# 
+
