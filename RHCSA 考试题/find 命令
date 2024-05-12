@@ -1,0 +1,12 @@
+例题： 找出 /etc/目录下大小超过 200MB 的文件，并将其复制到 /root/findfiles 目录下：
+
+1, 创建 /findfiles 目录：
+[root@mysql573 etc]# mkdir /root/findfiles
+
+2，在/etc/下搜索超过200M 的文件，并复制到目标目录：
+[root@mysql573 etc]# find /etc -size +200M -exec cp -a {} /root/findfiles/ \;
+
+3，检查 结果：
+[root@mysql573 etc]# ls -lh /root/findfiles/
+total 212M
+
