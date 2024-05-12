@@ -1,0 +1,18 @@
+在core multi user login 界面，可以使用 nmcli 命令来查看网卡
+
+特别是新安装的纯字符界面的系统，使用 nmcli 命令来修改网卡，同时指定 IP ，网关，DNS 等 。
+
+nmcli connection show  --- 查看当前的网络连接
+
+修改网络连接， 注意，如果网络连接叫 Wired connection 1 中间有空格的话，nmcli 命令要用 ”“ 双引号：
+
+nmcli connection modify "Wired connection 1" ipv4.method manual ipv4.addresses 192.168.19.215 ipv4.gateway 192.168.19.2 ipv4.dns 114.114.114.114 connection.autoconnect yes
+
+使用 ip a 命令查看IP地址是否已经显示出来
+
+nmcli connection up "Wired connection 1"
+
+使用 ping 命令测试。
+
+即可完成
+
