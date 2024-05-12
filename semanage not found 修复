@@ -1,0 +1,16 @@
+错误提示：
+
+root@mysql573 ~]# semanagement
+-bash: semanagement: command not found
+
+要修复这个命令 需要安装 
+
+[root@mysql573 ~]# yum -y install policycoreutils-python
+
+这样就可以查看端口了：
+
+[root@mysql573 ~]# semanage port -l | grep mysql
+mysqld_port_t                  tcp      1186, 3306, 63132-63164
+mysqlmanagerd_port_t           tcp      2273
+[root@mysql573 ~]# 
+
