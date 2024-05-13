@@ -15,4 +15,10 @@ drwxr-xr-x. 2 root admins 6 May 12 20:06 /home/tools/ ----  可以看到所属�
 [root@localhost ~]# chmod 2770 /home/tools/   --------- 一涉及拥有组的继承 要用2 
 [root@localhost ~]# 
 
+建立一个文件 进行测试，查看所属组是不是 admins 组：
+[root@localhost ~]# touch /home/tools/hello2024.c
+[root@localhost ~]# ll /home/tools/hello2024.c 
+-rw-r--r--. 1 root admins 0 May 12 20:18 /home/tools/hello2024.c
+[root@localhost ~]# 
+
 
