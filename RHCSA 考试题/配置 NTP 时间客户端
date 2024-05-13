@@ -1,0 +1,28 @@
+配置您的系统，使其成为 classroom.example.com 的NTP 客户端：
+
+编辑 chrony 的配置文件
+[root@localhost ~]# vim /etc/chrony.conf 
+
+[root@localhost ~]# cat /etc/chrony.conf 
+# Use public servers from the pool.ntp.org project.
+# Please consider joining the pool (http://www.pool.ntp.org/join.html).
+server classroom.example.com iburst    ------------------  写入 服务器地址： classroom.example.com
+
+重启 chronyd 服务：
+[root@localhost ~]# systemctl restart chronyd
+[root@localhost ~]# systemctl status chronyd
+● chronyd.service - NTP client/server
+   Loaded: loaded (/usr/lib/systemd/system/chronyd.service; enabled; vendor preset: enabled)
+   Active: active (running) since Sun 2024-05-12 20:28:19 EDT; 6s ago
+     Docs: man:chronyd(8)
+           man:chrony.conf(5)
+
+
+查看时间源 ：
+
+root@localhost ~]# chronyc sources
+210 Number of sources = 1
+MS Name/IP address         Stratum Poll Reach LastRx Last sample               
+===============================================================================
+^* hkhkg1-ntp-004.aaplimg.c>     1   6    17    10    -37us[ +869us] +/-   32ms
+[root@localhost ~]# 
