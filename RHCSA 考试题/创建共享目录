@@ -1,0 +1,18 @@
+创建具有以下特点的共享目录：
+1) /home/tools 所有组是 admins
+2) 此目录能被 admins 组的成员读取，写入和访问，除root 外其他用户没有这些权限
+3) 在此目录下创建的文件，其组的所有权自动创建为 admins 组
+
+解答：
+[root@localhost ~]# mkdir /home/tools  ---- 建立 tools 文件夹
+
+修改 tools 的所有组为 admins
+[root@localhost ~]# chgrp admins /home/tools/ 
+[root@localhost ~]# ll -ld /home/tools/
+drwxr-xr-x. 2 root admins 6 May 12 20:06 /home/tools/ ----  可以看到所属组 现在已经是 admins 组
+
+
+[root@localhost ~]# chmod 2770 /home/tools/   --------- 一涉及拥有组的继承 要用2 
+[root@localhost ~]# 
+
+
