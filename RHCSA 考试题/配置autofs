@@ -1,0 +1,10 @@
+按照以下要求，在 servera 上配置autofs 自动挂载：
+1）serverb 通过NFS 共享目录/rhome 到你的系统，此文件系统中包含为用户 ldapuser0 的家目录应自动挂载到本地的/rhome/ldapuser0 预配置的家目录
+
+2）预设用户 ldapuser0 的家目录应自动挂载到本地的/rhome/ldapuser0 目录
+3) 预设用户 ldapuser0 的家目录是 serverb.lab.example.com:/rhome/ldapuser0
+4) 预设用户 ldapuser0 的家目录应自动挂载到本地的 /rhome/ldapuser0目录
+5）挂在后的家目录必须可读可写
+
+
+
