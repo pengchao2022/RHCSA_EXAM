@@ -1,0 +1,134 @@
+在系统上添加一个 512 MiB 的交换分区，设置交换分区应在系统启动时自动挂载，不要删除或修改系统上已经存在的交换分区
+
+
+1, 先查看当前swap 分区的大小：
+[root@serverb ~]# free -h
+              total        used        free      shared  buff/cache   available
+Mem:           972M        174M        684M        7.7M        113M        667M
+Swap:          199M          0B        199M
+[root@serverb ~]# 
+
+2， 查看系统上可以使用的硬盘：
+[root@serverb ~]# fdisk -l
+
+Disk /dev/sda: 21.5 GB, 21474836480 bytes, 41943040 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk label type: dos
+Disk identifier: 0x000208b8
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1   *        2048      616447      307200   83  Linux
+/dev/sda2          616448    11732991     5558272   8e  Linux LVM
+
+Disk /dev/sdb: 1073 MB, 1073741824 bytes, 2097152 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+3，创建逻辑分区 大小为 512M :
+[root@serverb ~]# fdisk /dev/sdb
+Welcome to fdisk (util-linux 2.23.2).
+
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+Device does not contain a recognized partition table
+Building a new DOS disklabel with disk identifier 0xda41c979.
+
+Command (m for help): n
+Partition type:
+   p   primary (0 primary, 0 extended, 4 free)
+   e   extended
+Select (default p): e
+Partition number (1-4, default 1): 
+First sector (2048-2097151, default 2048): 
+Using default value 2048
+Last sector, +sectors or +size{K,M,G} (2048-2097151, default 2097151): 
+Using default value 2097151
+Partition 1 of type Extended and of size 1023 MiB is set
+
+Command (m for help): n
+Partition type:
+   p   primary (0 primary, 1 extended, 3 free)
+   l   logical (numbered from 5)
+Select (default p): l
+Adding logical partition 5
+First sector (4096-2097151, default 4096): 
+Using default value 4096
+Last sector, +sectors or +size{K,M,G} (4096-2097151, default 2097151): +512M
+Partition 5 of type Linux and of size 512 MiB is set
+
+Command (m for help): w
+The partition table has been altered!
+
+Calling ioctl() to re-read partition table.
+Syncing disks.
+[root@serverb ~]# 
+
+4, 查看分区：
+[root@serverb ~]# cat /proc/partitions 
+major minor  #blocks  name
+
+   8        0   20971520 sda
+   8        1     307200 sda1
+   8        2    5558272 sda2
+  11        0    4601856 sr0
+   8       16    1048576 sdb
+   8       17          1 sdb1
+   8       21     524288 sdb5
+ 253        0    5242880 dm-0
+ 253        1     204800 dm-1
+ 253        2     102400 dm-2
+
+5， 创建 swap 分区：
+[root@serverb ~]# mkswap /dev/sdb5
+Setting up swapspace version 1, size = 524284 KiB
+no label, UUID=9a924628-e189-4d07-8402-bb43759dc0dd
+[root@serverb ~]# 
+
+6,  开启swap 分区：
+[root@serverb ~]# swapon /dev/sdb5
+[root@serverb ~]# 
+
+7, 查看目前swap 分区的大小：
+[root@serverb ~]# free -h
+              total        used        free      shared  buff/cache   available
+Mem:           972M        174M        683M        7.7M        113M        667M
+Swap:          711M          0B        711M
+[root@serverb ~]# 
+
+8, 开机自动挂载 swap 分区：
+[root@serverb ~]# blkid
+/dev/sda1: UUID="de66b704-1792-466d-906e-8a76e6e06f74" TYPE="xfs" 
+/dev/sda2: UUID="Am0iS9-m3dy-Qd5j-kjaC-W18U-MnFN-pRurad" TYPE="LVM2_member" 
+/dev/sr0: UUID="2020-11-04-11-36-43-00" LABEL="CentOS 7 x86_64" TYPE="iso9660" PTTYPE="dos" 
+/dev/sdb5: UUID="9a924628-e189-4d07-8402-bb43759dc0dd" TYPE="swap" 
+/dev/mapper/centos-root: UUID="41ae2a73-0816-4805-b650-08ab0544a6bc" TYPE="xfs" 
+/dev/mapper/centos-swap: UUID="4320d2dd-b1b9-43bd-b925-42c030c4e463" TYPE="swap" 
+/dev/mapper/centos-home: UUID="81cf23df-3583-4f62-a113-70be90af7a20" TYPE="xfs"
+
+[root@serverb ~]# vim /etc/fstab 
+
+UUID=9a924628-e189-4d07-8402-bb43759dc0dd swap  swap    defaults        0 0
+
+9， 重新挂载：
+[root@serverb ~]# mount -a
+
+10, 可以检查下：
+[root@serverb ~]# lsblk
+NAME            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda               8:0    0   20G  0 disk 
+|-sda1            8:1    0  300M  0 part /boot
+`-sda2            8:2    0  5.3G  0 part 
+  |-centos-root 253:0    0    5G  0 lvm  /
+  |-centos-swap 253:1    0  200M  0 lvm  [SWAP]
+  `-centos-home 253:2    0  100M  0 lvm  /home
+sdb               8:16   0    1G  0 disk 
+|-sdb1            8:17   0    1K  0 part 
+`-sdb5            8:21   0  512M  0 part [SWAP]
+sr0              11:0    1  4.4G  0 rom  
+
+
+
