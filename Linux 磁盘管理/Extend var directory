@@ -1,0 +1,64 @@
+this script is to extend the /var directory 
+
+pvs command to see how many pv do you have:
+
+[root@bwlinux ~]# pvs
+  PV         VG     Fmt  Attr PSize   PFree
+  /dev/sda2  rhel   lvm2 a--  <79.61g    4.00m
+  /dev/sda3  vg2024 lvm2 a--   47.98g       0
+  /dev/sdb1  vg2025 lvm2 a--   19.98g       0
+  /dev/sdb2  vg2025 lvm2 a--   19.98g   64.00m
+  /dev/sdb3  vg2026 lvm2 a--  <40.00g 1020.00m
+
+  vgs to see how many vg do you have
+ [root@bwlinux ~]# vgs
+  VG     #PV #LV #SN Attr   VSize   VFree
+  rhel     1   7   0 wz--n- <79.61g    4.00m
+  vg2024   1   1   0 wz--n-  47.98g       0
+  vg2025   2   1   0 wz--n- <39.97g   64.00m
+  vg2026   1   1   0 wz--n- <40.00g 1020.00m
+
+  lvs to see how many lv do you have
+  [root@bwlinux ~]# lvs
+  LV          VG     Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  Application rhel   -wi-ao----  20.00g
+  home        rhel   -wi-ao----   2.00g
+  mysql       rhel   -wi-ao----   3.00g
+  root        rhel   -wi-ao----  20.00g
+  swap        rhel   -wi-ao----   4.00g
+  var         rhel   -wi-ao----  13.00g
+  weblog      rhel   -wi-ao----  17.60g
+  lv2024      vg2024 -wi-ao----  47.98g
+  lv2025      vg2025 -wi-ao---- <39.91g
+  lv2026      vg2026 -wi-ao----  39.00g
+
+  first create a new pv use /dev/sda3 for example:
+
+  pvcreate /dev/sda3
+
+  second: [root@bwlinux ~]# partprobe /dev/sda3
+
+  Next extend VG
+
+  vgextend vg00 /dev/sda4 /dev/sdn1
+
+  Next extend LV, for example , add 30GB 
+
+  lvextend -L +30G /dev/vg/lv 
+
+  After extending the LV, resize the filesystem to utilize the new space. The command depends on the type of filesystem you’re using.
+
+For XFS (default in CentOS 8):
+
+sudo xfs_growfs /var
+
+For ext4:
+
+sudo resize2fs /dev/VG/LV
+
+    df -h /var    -------- To check the size of extended var 
+
+  
+
+  
+  
