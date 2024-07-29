@@ -1,0 +1,26 @@
+To Install cowsay , you can use:
+
+yum install cowsay
+
+[ansible@bwlinux ~]$ cowsay "I love linux"
+ ______________
+< I love linux >
+ --------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+
+
+
+[ansible@bwlinux ~]$ cowsay -T U Hello
+ _______
+< Hello >
+ -------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+             U ||----w |
+                ||     ||
