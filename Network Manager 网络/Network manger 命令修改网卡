@@ -16,3 +16,7 @@ nmcli connection up "Wired connection 1"
 
 即可完成
 
+启动网卡的名利：
+
+nmcli dev disconnect ens33
+
