@@ -16,7 +16,11 @@ nmcli connection up "Wired connection 1"
 
 即可完成
 
-启动网卡的名利：
+启动网卡的命令
+
+nmcli dev connect ens33
+
+断开网卡的命令
 
 nmcli dev disconnect ens33
 
